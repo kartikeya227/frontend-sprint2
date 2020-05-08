@@ -57,7 +57,8 @@ export class ScheduledFlightService {
 
   /** PUT: update the ScheduledFlight on the server */
   updateScheduledFlight(scheduledFlight: ScheduledFlight): Observable<any> {
-    return this.http.put(this.scheduledFlightUrl, scheduledFlight, this.httpOptions).pipe(
+    const url = `${this.scheduledFlightUrl}/${scheduledFlight.scheduleFlightId}`;
+    return this.http.put(url, scheduledFlight, this.httpOptions).pipe(
       tap(_ => this.log(`updated scheduled flight id=${scheduledFlight.scheduleFlightId}`)),
       catchError(this.handleError<any>('updateScheduledFlight'))
     );

@@ -1,6 +1,6 @@
 <app-user-panel></app-user-panel>
 
-<div class="container-fluid">
+<div *ngIf="!noBookings" class="container-fluid">
   <div class="row">
 
     <div *ngIf="displayList" class="card my-5 col-sm-3 col-md-6 col-lg-4">
@@ -195,3 +195,4 @@
   <button (click)="ConfirmUpdateDetails()" type="submit" class="btn btn-info mr-1">Confirm & Update Booking</button>
 
 </div>
+<div *ngIf="noBookings" class="alert-danger"> No Bookings made yet</div>

@@ -5,6 +5,7 @@ import {Bookings} from '../../../Model/bookings';
 import {GlobalService} from '../../../Service/global.service';
 import {ScheduledFlight} from '../../../Model/scheduled-flight';
 import {BookingsService} from '../../../Service/bookings.service';
+import {ScheduledFlightService} from '../../../Service/scheduled-flight.service';
 
 @Component({
   selector: 'app-confirm-booking',
@@ -20,7 +21,8 @@ export class ConfirmBookingComponent implements OnInit {
   scheduledFlight: ScheduledFlight;
   addedBooking: Bookings;
   constructor( private globalService: GlobalService,
-               private bookingsService: BookingsService) {
+               private bookingsService: BookingsService,
+               private scheduledFlightService:ScheduledFlightService) {
     this.passengers = new Array();
     this.passenger = new Passengers();
     this.booking = new Bookings();
@@ -40,7 +42,20 @@ export class ConfirmBookingComponent implements OnInit {
     this.booking.noOfPassengers = this.passengers.length;
     this.booking.cost = this.scheduledFlight.costPerTicket * this.passengers.length;
     this.booking.scheduledFlight = this.scheduledFlight;
-    this.bookingsService.addBooking(this.booking).subscribe(booking => {this.addedBooking = booking; });
+    this.scheduledFlight.availableSeats = this.scheduledFlight.availableSeats - this.passengers.length;
+    if (this.scheduledFlight.availableSeats >= 0){
+        this.scheduledFlightService.updateScheduledFlight(this.scheduledFlight)
+          .subscribe(value => {
+            this.bookingsService.addBooking(this.booking)
+                  .subscribe(booking => {this.addedBooking = booking;
+                                         alert('Booking Successfully made');
+                  });
+        });
+    }
+    else{
+      alert('Booking not possible. Available seats less than number of required seats.');
+    }
+
   }
 
   ngOnInit(): void {

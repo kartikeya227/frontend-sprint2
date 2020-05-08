@@ -4,6 +4,8 @@ import {ScheduledFlightService} from '../../Service/scheduled-flight.service';
 import {GlobalService} from '../../Service/global.service';
 import {UserService} from '../../Service/user.service';
 import {Users} from '../../Model/users';
+import {Bookings} from '../../Model/bookings';
+import {BookingsService} from '../../Service/bookings.service';
 
 @Component({
   selector: 'app-user-account',
@@ -14,17 +16,44 @@ export class UserAccountComponent implements OnInit {
 
   userDetails: Users;
   showUpdate: boolean;
+  bookings: Bookings[];
   constructor(private route: ActivatedRoute,
               private router: Router,
               private userService: UserService,
-              private globalService: GlobalService) {
+              private globalService: GlobalService,
+              private bookingsService: BookingsService) {
     this.userDetails = new Users();
   }
 
   deleteAccount(): void{
-    this.userService.deleteUser(this.userDetails.userId).subscribe();
-    this.globalService.setCurrentUser(new Users());
-    this.router.navigate(['']);
+    this.bookings = new Array();
+    this.bookingsService.getBookingsByUserId(this.userDetails.userId)
+      .subscribe(bookings => {
+        this.bookings = bookings;
+        const lenght = bookings.length;
+        let i = 0;
+        this.bookings.forEach(value => {
+          alert('hi');
+          this.bookingsService.deleteBookings(value.bookingId).subscribe(value1 => {i = i + 1;
+              if (lenght == i){
+              this.userService.deleteUser(this.userDetails.userId).subscribe(value2 => {
+                this.userDetails = new Users();
+                this.globalService.setCurrentUser(new Users());
+                this.router.navigate(['']);
+                alert('hi2');
+              });
+            }
+          });
+
+        });
+
+      });
+
+    alert('hi3');
+    // this.userService.deleteUser(this.userDetails.userId).subscribe();
+    // this.userDetails = new Users();
+    // this.globalService.setCurrentUser(new Users());
+    // this.router.navigate(['']);
 
   }
   updateAccount(): void{
