@@ -1,0 +1,101 @@
+<app-user-panel></app-user-panel>
+<div>
+  <div class="card my-5">
+    <div class="card-header">Account Details</div>
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Field</th>
+          <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td>User Id</td>
+          <td>{{userDetails.userId}}</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>User Name</td>
+          <td>{{userDetails.userName}}</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Password</td>
+          <td>{{userDetails.userPassword}}</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>User Type</td>
+          <td>{{userDetails.userType}}</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Phone number</td>
+          <td>{{userDetails.userPhone}}</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Email</td>
+          <td>{{userDetails.userEmail}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <button (click)="deleteAccount()" type="submit" class="btn btn-danger mr-1">Delete Account</button>
+  <button (click)="updateAccount()" type="submit" class="btn btn-info">Update Details</button>
+</div>
+<div *ngIf="showUpdate">
+  <div class="card my-5">
+    <div class="card-header">Account Details</div>
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Field</th>
+          <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td>User Id</td>
+          <td>{{userDetails.userId}}</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>User Name</td>
+          <td><input [(ngModel)]="userDetails.userName"></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Password</td>
+          <td><input [(ngModel)]="userDetails.userPassword"></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>User Type</td>
+          <td>{{userDetails.userType}}</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Phone number</td>
+          <td><input [(ngModel)]="userDetails.userPhone"></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Email</td>
+          <td><input [(ngModel)]="userDetails.userEmail"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <button (click)="confirmUpdateAccount()" type="submit" class="btn btn-info">Confirm & Update Account</button>
+
+</div>

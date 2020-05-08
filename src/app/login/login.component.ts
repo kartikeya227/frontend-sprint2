@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.findAllUsers().subscribe(data => {
+    this.userService.getUsers().subscribe(data => {
       this.users = data;
     });
   }

@@ -19,6 +19,15 @@ import {UserService} from './Service/user.service';
 import {GlobalService} from './Service/global.service';
 import { AdminPanelLandingComponent } from './admin-panel/admin-panel-landing/admin-panel-landing.component';
 import { UserPanelLandingComponent } from './user-panel/user-panel-landing/user-panel-landing.component';
+import { AdminBookingsComponent } from './admin-panel/admin-bookings/admin-bookings.component';
+import { UserMakeBookingComponent } from './user-panel/user-make-booking/user-make-booking.component';
+import {BookingsService} from './Service/bookings.service';
+import {ScheduledFlightService} from './Service/scheduled-flight.service';
+import { ConfirmBookingComponent } from './user-panel/user-make-booking/confirm-booking/confirm-booking.component';
+import {FlightsService} from './Service/flights.service';
+import { AdminAccountComponent } from './admin-panel/admin-account/admin-account.component';
+import { UserAccountComponent } from './user-panel/user-account/user-account.component';
+import { UserBookingsComponent } from './user-panel/user-bookings/user-bookings.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +42,13 @@ import { UserPanelLandingComponent } from './user-panel/user-panel-landing/user-
     AdminPanelComponent,
     UserPanelComponent,
     AdminPanelLandingComponent,
-    UserPanelLandingComponent
+    UserPanelLandingComponent,
+    AdminBookingsComponent,
+    UserMakeBookingComponent,
+    ConfirmBookingComponent,
+    AdminAccountComponent,
+    UserAccountComponent,
+    UserBookingsComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +57,9 @@ import { UserPanelLandingComponent } from './user-panel/user-panel-landing/user-
     FormsModule
   ],
   providers: [AirportService,
+              BookingsService,
+              FlightsService,
+              ScheduledFlightService,
               UserService,
               GlobalService],
   bootstrap: [AppComponent]

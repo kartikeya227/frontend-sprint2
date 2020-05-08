@@ -13,7 +13,7 @@ export class SignupSuccessComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.userService.findAllUsers().subscribe(data => {
+    this.userService.getUsers().subscribe(data => {
       this.users = data;
     });
   }

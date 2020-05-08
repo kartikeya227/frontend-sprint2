@@ -1,0 +1,89 @@
+<app-user-panel></app-user-panel>
+<hr>
+<h1>Enter the passenger details for each passenger</h1>
+<!--Input for passenger details-->
+<div>
+  <div>Enter Passneger details here</div>
+  <div class="card my-5">
+    <div class="card-body">
+      <form  (ngSubmit)="addPassengers()" #addPassengersForm="ngForm">
+        <div class="form-group">
+          <label for="passengerName">Name</label>
+          <input type="text" [(ngModel)]="passenger.passengerName"
+                 class="form-control"
+                 id="passengerName"
+                 name="passengerName"
+                 placeholder="Enter Passenger Name"
+                 required #passengerName="ngModel">
+        </div>
+        <div [hidden]="!passengerName.pristine" class="alert alert-danger">Passenger Name is required</div>
+
+        <div class="form-group">
+          <label for="passengerAge">Age</label>
+          <input type="number" [(ngModel)]="passenger.passengerAge"
+                 class="form-control"
+                 id="passengerAge"
+                 name="passengerAge"
+                 placeholder="Enter Age"
+                 required #passengerAge="ngModel">
+        </div>
+        <div [hidden]="!passengerAge.pristine" class="alert alert-danger">Passenger's age is required</div>
+
+        <div class="form-group">
+          <label for="passengerUin">Unique Id Number</label>
+          <input type="number" [(ngModel)]="passenger.passengerUin"
+                 class="form-control"
+                 id="passengerUin"
+                 name="passengerUin"
+                 placeholder="Enter Unique Id Number"
+                 required #passengerUin="ngModel">
+        </div>
+        <div [hidden]="!passengerUin.pristine" class="alert alert-danger">Unique Id Number is required</div>
+
+        <div class="form-group">
+          <label for="luggage">Weight of Luggage</label>
+          <input type="number" [(ngModel)]="passenger.luggage"
+                 class="form-control"
+                 id="luggage"
+                 name="luggage"
+                 placeholder="Enter Weight of Luggage"
+                 required #luggage="ngModel">
+        </div>
+        <div [hidden]="!luggage.pristine" class="alert alert-danger">Weight of Luggage is required</div>
+
+        <button type="submit" [disabled]="!addPassengersForm.form.valid"
+                class="btn btn-info">Add Passenger</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+<!--Already entered passengers-->
+<div>
+  <div>Lisof Passengers entered till now.</div>
+  <div class="card my-5">
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Age</th>
+          <th scope="col">Uin</th>
+          <th scope="col">Luggage</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let passenger of passengers; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{ passenger.passengerName }}</td>
+          <td>{{ passenger.passengerAge }}</td>
+          <td>{{ passenger.passengerUin}}</td>
+          <td>{{ passenger.luggage}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<button (click)="makeBooking()" type="submit" class="btn btn-info">Confirm & Book</button>

@@ -1,0 +1,165 @@
+<app-admin-panel></app-admin-panel>
+
+<div class="container-fluid">
+  <div class="row">
+
+      <div class="card my-5 col-sm-3 col-md-6 col-lg-4">
+        <div class="card-body">
+          <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Booking Id</th>
+              <th scope="col">Booked by</th>
+              <th scope="col">Passenger count</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr (click)="getDetails(i)" *ngFor="let booking of bookings; let i = index">
+              <td>{{i+1}}</td>
+              <td>{{ booking.bookingId}}</td>
+              <td>{{ booking.user.userName}}</td>
+              <td>{{ booking.noOfPassengers }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    <div *ngIf="displayDetails" class="card my-5 col-sm-9 col-md-6 col-lg-8">
+      <div class="card-body">
+        <div class="card-header alert-success font-weight-bolder text-center">Booking Details</div>
+        <table class="table table-bordered table-striped">
+          <thead class="thead-dark">
+
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Field</th>
+            <th scope="col">Value</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>1</td>
+            <td>Booking ID</td>
+            <td>{{currentBooking.bookingId}}</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Booked by</td>
+            <td>{{currentBooking.user.userName}}</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>User Id</td>
+            <td>{{currentBooking.user.userId}}</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>contact number</td>
+            <td>{{currentBooking.user.userPhone}}</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Email</td>
+            <td>{{currentBooking.user.userEmail}}</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>passenger count</td>
+            <td>{{currentBooking.noOfPassengers}}</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Cost per ticket</td>
+            <td>{{currentBooking.scheduledFlight.costPerTicket}}</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>Total cost</td>
+            <td>{{currentBooking.cost}}</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>Flight Schedule Id</td>
+            <td>{{currentBooking.scheduledFlight.scheduleFlightId}}</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>Arrival Date</td>
+            <td>{{currentBooking.scheduledFlight.schedule.arrivalDate}}</td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td>arrivalTime</td>
+            <td>{{currentBooking.scheduledFlight.schedule.arrivalTime}}</td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td>departureDate</td>
+            <td>{{currentBooking.scheduledFlight.schedule.departureDate}}</td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td>departureTime</td>
+            <td>{{currentBooking.scheduledFlight.schedule.departureTime}}</td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td>Source airportName</td>
+            <td>{{currentBooking.scheduledFlight.schedule.sourceAirport.airportName}}</td>
+          </tr>
+          <tr>
+            <td>15</td>
+            <td>Destinaltion airportName</td>
+            <td>{{currentBooking.scheduledFlight.schedule.destinationAirport.airportName}}</td>
+          </tr>
+          <tr>
+            <td>16</td>
+            <td>flightNumber</td>
+            <td>{{currentBooking.scheduledFlight.flight.flightNumber}}</td>
+          </tr>
+          <tr>
+            <td>17</td>
+            <td>carrierName</td>
+            <td>{{currentBooking.scheduledFlight.flight.carrierName}}</td>
+          </tr>
+          <tr>
+            <td>18</td>
+            <td>flightModel</td>
+            <td>{{currentBooking.scheduledFlight.flight.flightModel}}</td>
+          </tr>
+          <tr>
+            <td>19</td>
+            <td>seatCapacity</td>
+            <td>{{currentBooking.scheduledFlight.flight.seatCapacity}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="card-header alert-success font-weight-bolder text-center">Passenger List</div>
+        <table class="table table-bordered table-striped">
+          <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">PNR</th>
+            <th scope="col">Name</th>
+            <th scope="col">Luggage</th>
+            <th scope="col">Age</th>
+            <th scope="col">Unique ID</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let passenger of currentBooking.passengerList; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{ passenger.pnrNumber}}</td>
+            <td>{{ passenger.passengerName}}</td>
+            <td>{{ passenger.luggage}}</td>
+            <td>{{ passenger.passengerAge}}</td>
+            <td>{{ passenger.passengerUin}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
