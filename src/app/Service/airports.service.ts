@@ -1,14 +1,13 @@
-// airportsUrl = 'http://localhost:9090/admin/airport';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable, of} from 'rxjs';
+import {catchError, tap} from 'rxjs/operators';
 import {Airport} from '../Model/airport';
 
-
-@Injectable({ providedIn: 'root' })
-export class AirportService {
+@Injectable({
+  providedIn: 'root'
+})
+export class AirportsService {
 
   private airportsUrl = 'http://localhost:9090/admin/airport';  // URL to web api
 
@@ -18,7 +17,7 @@ export class AirportService {
 
   constructor(private http: HttpClient) { }
 
-  /** GET Airport from the server */
+  /** GET Users from the server */
   getAirports(): Observable<Airport[]> {
     return this.http.get<Airport[]>(this.airportsUrl)
       .pipe(
@@ -38,19 +37,19 @@ export class AirportService {
 
   //////// Save methods //////////
 
-  /** POST: add a new booking to the server */
+  /** POST: add a new Airport to the server */
   addAirport(airport: Airport): Observable<Airport> {
     return this.http.post<Airport>(this.airportsUrl, airport, this.httpOptions).pipe(
-      tap((newAirport: Airport) => this.log(`Made Airport with id=${newAirport.airportCode}`)),
+      tap((newAirport: Airport) => this.log(`Made Airport with code=${newAirport.airportCode}`)),
       catchError(this.handleError<Airport>(`addAirport`))
     );
   }
 
-  /** DELETE: delete the hero from the server */
+  /** DELETE: delete the user from the server */
   deleteAirport(id: string): Observable<Airport> {
     const url = `${this.airportsUrl}/${id}`;
     return this.http.delete<Airport>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted Airport id=${id}`)),
+      tap(_ => this.log(`deleted Airport code=${id}`)),
       catchError(this.handleError<Airport>(`deleteAirport`))
     );
   }
@@ -59,7 +58,7 @@ export class AirportService {
   updateAirport(airport: Airport): Observable<any> {
     const url = `${this.airportsUrl}/${airport.airportCode}`;
     return this.http.put(url, airport, this.httpOptions).pipe(
-      tap((newAirport: Airport) => this.log(`Updated Booking with id=${newAirport.airportCode}`)),
+      tap((newAirport: Airport) => this.log(`Updated Airport with code=${newAirport.airportCode}`)),
       catchError(this.handleError<Airport>(`updateAirport`))
     );
   }

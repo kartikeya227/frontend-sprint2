@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {AirportComponent} from './airport/airport.component';
-import {AddAirportComponent} from './airport/add-airport/add-airport.component';
 import {LoginComponent} from './login/login.component';
 import {SignupComponent} from './signup/signup.component';
 import {LandingComponent} from './landing/landing.component';
@@ -16,11 +14,10 @@ import {ConfirmBookingComponent} from './user-panel/user-make-booking/confirm-bo
 import {AdminAccountComponent} from './admin-panel/admin-account/admin-account.component';
 import {UserAccountComponent} from './user-panel/user-account/user-account.component';
 import {UserBookingsComponent} from './user-panel/user-bookings/user-bookings.component';
+import {AdminAirportComponent} from './admin-panel/admin-airport/admin-airport.component';
 
 
 const routes: Routes = [
-  { path: 'allairports', component: AirportComponent},
-  { path: 'addairport', component: AddAirportComponent},
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent},
   { path: '', component: LandingComponent},
@@ -32,7 +29,8 @@ const routes: Routes = [
   { path: 'userconfirmbooking', component: ConfirmBookingComponent},
   { path: 'userpanel/account', component: UserAccountComponent},
   { path: 'adminpanel/account', component: AdminAccountComponent},
-  { path: 'userpanel/bookings', component: UserBookingsComponent}
+  { path: 'userpanel/bookings', component: UserBookingsComponent},
+  { path: 'adminpanel/airports', component: AdminAirportComponent}
 
 ];
 

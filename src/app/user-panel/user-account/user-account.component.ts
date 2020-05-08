@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ScheduledFlightService} from '../../Service/scheduled-flight.service';
 import {GlobalService} from '../../Service/global.service';
 import {UserService} from '../../Service/user.service';
 import {Users} from '../../Model/users';
@@ -33,35 +32,27 @@ export class UserAccountComponent implements OnInit {
         const lenght = bookings.length;
         let i = 0;
         this.bookings.forEach(value => {
-          alert('hi');
           this.bookingsService.deleteBookings(value.bookingId).subscribe(value1 => {i = i + 1;
               if (lenght == i){
               this.userService.deleteUser(this.userDetails.userId).subscribe(value2 => {
                 this.userDetails = new Users();
                 this.globalService.setCurrentUser(new Users());
                 this.router.navigate(['']);
-                alert('hi2');
               });
             }
           });
-
         });
-
       });
-
-    alert('hi3');
-    // this.userService.deleteUser(this.userDetails.userId).subscribe();
-    // this.userDetails = new Users();
-    // this.globalService.setCurrentUser(new Users());
-    // this.router.navigate(['']);
-
   }
   updateAccount(): void{
     this.showUpdate = true;
   }
   confirmUpdateAccount(): void{
     this.userService.updateUser(this.userDetails).
-    subscribe(user => this.globalService.setCurrentUser(user));
+    subscribe(user => {
+      this.globalService.setCurrentUser(user);
+      this.showUpdate = false;
+    });
   }
 
   ngOnInit(): void {

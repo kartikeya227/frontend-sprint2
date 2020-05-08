@@ -3,10 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AirportComponent } from './airport/airport.component';
 import {HttpClientModule} from '@angular/common/http';
-import {AirportService} from './Service/airport.service';
-import { AddAirportComponent } from './airport/add-airport/add-airport.component';
 import {FormsModule} from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -28,12 +25,12 @@ import {FlightsService} from './Service/flights.service';
 import { AdminAccountComponent } from './admin-panel/admin-account/admin-account.component';
 import { UserAccountComponent } from './user-panel/user-account/user-account.component';
 import { UserBookingsComponent } from './user-panel/user-bookings/user-bookings.component';
+import { AdminAirportComponent } from './admin-panel/admin-airport/admin-airport.component';
+import {AirportsService} from './Service/airports.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AirportComponent,
-    AddAirportComponent,
     LoginComponent,
     NavbarComponent,
     SignupComponent,
@@ -48,7 +45,8 @@ import { UserBookingsComponent } from './user-panel/user-bookings/user-bookings.
     ConfirmBookingComponent,
     AdminAccountComponent,
     UserAccountComponent,
-    UserBookingsComponent
+    UserBookingsComponent,
+    AdminAirportComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +54,7 @@ import { UserBookingsComponent } from './user-panel/user-bookings/user-bookings.
     HttpClientModule,
     FormsModule
   ],
-  providers: [AirportService,
+  providers: [AirportsService,
               BookingsService,
               FlightsService,
               ScheduledFlightService,

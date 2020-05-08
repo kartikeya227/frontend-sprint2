@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddAirportComponent } from './add-airport.component';
+import { AdminAirportComponent } from './admin-airport.component';
 
-describe('AddAirportComponent', () => {
-  let component: AddAirportComponent;
-  let fixture: ComponentFixture<AddAirportComponent>;
+describe('AdminAirportComponent', () => {
+  let component: AdminAirportComponent;
+  let fixture: ComponentFixture<AdminAirportComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddAirportComponent ]
+      declarations: [ AdminAirportComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddAirportComponent);
+    fixture = TestBed.createComponent(AdminAirportComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,135 @@
+<app-admin-panel></app-admin-panel>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="card my-5 col-sm-3 col-md-6 col-lg-4">
+        <div class="card-body">
+          <div class="card-header alert-success font-weight-bolder text-center">Airport List</div>
+          <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Airport Code</th>
+              <th scope="col">Airport Name</th>
+              <th scope="col">Airport Location</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr (click)="getCurrentAirport(i)" *ngFor="let airport of airports; let i = index">
+              <td>{{i+1}}</td>
+              <td>{{ airport.airportCode }}</td>
+              <td>{{ airport.airportName }}</td>
+              <td>{{ airport.airportLocation}}</td>
+            </tr>
+            </tbody>
+          </table>
+          <div>
+            <button (click)="addAirportShow()" type="submit" class="btn btn-info mr-1">Add Airport</button>
+            <hr>
+
+            <form *ngIf="showAddAirport" (ngSubmit)="addAirport()" #addAirportForm="ngForm">
+              <div class="card-header text-center font-weight-bolder">Enter Airport Details</div>
+              <div class="form-group">
+                <label for="airportCode">Airport Code</label>
+                <input type="text" [(ngModel)]="currentAirport.airportCode"
+                       class="form-control"
+                       id="airportCode"
+                       name="airportCode"
+                       placeholder="Enter Airport Code"
+                       required #airportCode="ngModel">
+              </div>
+              <div [hidden]="!airportCode.pristine" class="alert alert-danger">Airport Code is required</div>
+
+              <div class="form-group">
+                <label for="airportLocation">Location</label>
+                <input type="text" [(ngModel)]="currentAirport.airportLocation"
+                       class="form-control"
+                       id="airportLocation"
+                       name="airportLocation"
+                       placeholder="Enter Location"
+                       required #airportLocation="ngModel">
+              </div>
+              <div [hidden]="!airportLocation.pristine" class="alert alert-danger">Location is required</div>
+
+              <div class="form-group">
+                <label for="airportName">Airport Name</label>
+                <input type="text" [(ngModel)]="currentAirport.airportName"
+                       class="form-control"
+                       id="airportName"
+                       name="airportName"
+                       placeholder="Enter Airport Name"
+                       required #airportName="ngModel">
+              </div>
+              <div [hidden]="!airportName.pristine" class="alert alert-danger">Airport Name is required</div>
+
+              <button type="submit" [disabled]="!addAirportForm.form.valid"
+                      class="btn btn-info">Submit & Add Airport</button>
+            </form>
+          </div>
+        </div>
+
+
+    </div>
+
+    <div *ngIf="showDetails" class="card my-5 col-sm-9 col-md-6 col-lg-8">
+      <div class="card-body">
+        <div class="card-header alert-success font-weight-bolder text-center">Airport Details</div>
+        <table class="table table-bordered table-striped">
+          <thead class="thead-dark">
+
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Field</th>
+            <th scope="col">Value</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>1</td>
+            <td>Airport Code</td>
+            <td>{{currentAirport.airportCode}}</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Location</td>
+            <td>{{currentAirport.airportLocation}}</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Name</td>
+            <td>{{currentAirport.airportName}}</td>
+          </tr>
+
+          </tbody>
+        </table>
+        <button (click)="deleteAirport()" type="submit" class="btn btn-danger mr-1">Delete Airport</button>
+        <button (click)="updateAirport()" type="submit" class="btn btn-info">Update Airport</button>
+        <div *ngIf="showUpdate">
+
+          <div class="card-header alert-success font-weight-bolder text-center">Passenger List</div>
+          <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+              <th scope="col">Airport Code</th>
+              <th scope="col">Location</th>
+              <th scope="col">Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{ currentAirport.airportCode}}</td>
+              <td><input [(ngModel)]="currentAirport.airportLocation"></td>
+              <td><input [(ngModel)]="currentAirport.airportName"></td>
+            </tr>
+            </tbody>
+          </table>
+          <button  (click)="confirmUpdate()" type="submit" class="btn btn-info mr-1">Confirm & Update Airport</button>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
