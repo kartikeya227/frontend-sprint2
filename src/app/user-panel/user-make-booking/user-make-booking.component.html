@@ -1,9 +1,67 @@
 <app-user-panel></app-user-panel>
-<div>
-  <div class="alert-success text-center font-weight-bolder">All available Scheduled Flights</div>
 
+<div class="row">
+  <div class="col d-flex justify-content-center">
+    <button (click)="allScheduledFlights()"  type="submit" class="btn btn-info mr-1">All Flights</button>
+    <button (click)="searchScheduledFlight()" type="submit" class="btn btn-info">Search Fights</button>
+  </div>
 </div>
-<main>
+<hr>
+
+<div *ngIf="showSelect" class="card my-5">
+  <div class="card-header"> Enter the Details to Search Flights</div>
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Board From</th>
+        <th scope="col">Going to</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let airport of airports; let i = index">
+        <td>{{i+1}}</td>
+        <td (click)="setSourceAirport(i)">{{ airport.airportLocation}}</td>
+        <td (click)="setDestinationAirport(i)">{{ airport.airportLocation }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="card-header"> Select a Time Span for the flights to be viewed.</div>
+    <form (ngSubmit)="prepareSearch()" #loginForm="ngForm">
+      <div class="form-group">
+        <label>Starting Date</label>
+        <input type="date" [(ngModel)]="d1"
+               class="form-control"
+               id="dateFrom"
+               name="dateFrom"
+               placeholder="Enter Date"
+               required #dateFrom="ngModel">
+      </div>
+      <div [hidden]="!dateFrom.pristine" class="alert alert-danger">Date is required</div>
+      <div class="form-group">
+        <label>Starting Date</label>
+        <input type="date" [(ngModel)]="d2"
+               class="form-control"
+               id="dateTo"
+               name="dateTo"
+               placeholder="Enter Date"
+               required #dateTo="ngModel">
+      </div>
+      <div [hidden]="!dateTo.pristine" class="alert alert-danger">Date is required</div>
+      <button type="submit" [disabled]="!loginForm.form.valid"
+              class="btn btn-info">Prepare Search</button>
+    </form>
+    <div *ngIf="preparedSearch">
+      from{{arrivalAirport}}to{{departureAirport}}timespan--from{{arrivalDate}}to{{departureDate}}
+      <button (click)="searchFlights()" type="submit" class="btn btn-info">Search Flights!</button>
+
+    </div>
+  </div>
+</div>
+
+<main *ngIf="scheduledFlightsReady">
+  <div class="alert-success text-center font-weight-bolder">All available Scheduled Flights</div>
 
   <div class="container-fluid">
     <div class="row">

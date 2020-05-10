@@ -1,16 +1,18 @@
 // scheduledFlightUrl = 'http://localhost:9090/scheduled/flight';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import {ScheduledFlight} from '../Model/scheduled-flight';
+import {ScheduledFlightSearchByAirportDate} from '../Model/scheduled-flight-search-by-airport-date';
 
 
 @Injectable({ providedIn: 'root' })
 export class ScheduledFlightService {
 
   private scheduledFlightUrl = 'http://localhost:9090/scheduled/flight';  // URL to web api
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -25,6 +27,22 @@ export class ScheduledFlightService {
         catchError(this.handleError<ScheduledFlight[]>('getScheduledFlight', []))
       );
   }
+
+  /** GET Scheduled Flights from the server by Airport And Date */
+
+  getScheduledFlightByAirportDate(arivalAirport: string,
+                                  departureAirport: string,
+                                  arrivalDate: string,
+                                  departureDate: string): Observable<ScheduledFlight[]> {
+    const url = `${this.scheduledFlightUrl}/${arivalAirport}/${departureAirport}/${arrivalDate}/${departureDate}`;
+    return this.http.get<ScheduledFlight[]>(url)
+      .pipe(
+        tap(_ => this.log('fetched Scheduled Fights')),
+        catchError(this.handleError<ScheduledFlight[]>('getScheduledFlightByAirportDate', []))
+      );
+  }
+
+
 
 
   /** GET ScheduledFlight by id. Will 404 if id not found */
