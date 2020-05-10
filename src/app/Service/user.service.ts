@@ -22,35 +22,35 @@ export class UserService {
   getUsers(): Observable<Users[]> {
     return this.http.get<Users[]>(this.userUrl)
       .pipe(
-        tap(_ => this.log('fetched Users')),
+        tap(_ => this.log('Fetched Users')),
         catchError(this.handleError<Users[]>(`getUsers`, []))
       );
   }
 
-  /** GET Airports by id. Will 404 if id not found */
+  /** GET User by id. Will 404 if id not found */
   getUser(id: number): Observable<Users> {
     const url = `${this.userUrl}/${id}`;
     return this.http.get<Users>(url).pipe(
-      tap(_ => this.log(`fetched User id=${id}`)),
-      catchError(this.handleError<Users>(`getUser id=${id}`))
+      tap(_ => this.log(`Fetched User Id: ${id}`)),
+      catchError(this.handleError<Users>(`getUser Id: ${id}`))
     );
   }
 
   //////// Save methods //////////
 
-  /** POST: add a new booking to the server */
+  /** POST: add a new User to the server */
   addUser(user: Users): Observable<Users> {
     return this.http.post<Users>(this.userUrl, user, this.httpOptions).pipe(
-      tap((newUser: Users) => this.log(`Made Account with user id=${newUser.userId}`)),
+      tap((newUser: Users) => this.log(`Made Account with User Id: ${newUser.userId}`)),
       catchError(this.handleError<Users>(`addUser`))
     );
   }
 
-  /** DELETE: delete the user from the server */
+  /** DELETE: Delete the user from the server */
   deleteUser(id: number): Observable<Users> {
     const url = `${this.userUrl}/${id}`;
     return this.http.delete<Users>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted User id=${id}`)),
+      tap(_ => this.log(`Deleted User id: ${id}`)),
       catchError(this.handleError<Users>(`deleteUser`))
     );
   }
@@ -59,7 +59,7 @@ export class UserService {
   updateUser(user: Users): Observable<any> {
     const url = `${this.userUrl}/${user.userId}`;
     return this.http.put(url, user, this.httpOptions).pipe(
-      tap((newUser: Users) => this.log(`Updated Booking with id=${newUser.userId}`)),
+      tap((newUser: Users) => this.log(`Updated Booking with Id: ${newUser.userId}`)),
       catchError(this.handleError<Users>(`updateUser`))
     );
   }

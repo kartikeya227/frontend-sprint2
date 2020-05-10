@@ -23,7 +23,7 @@ export class ScheduledFlightService {
   getScheduledFlight(): Observable<ScheduledFlight[]> {
     return this.http.get<ScheduledFlight[]>(this.scheduledFlightUrl)
       .pipe(
-        tap(_ => this.log('fetched Scheduled Fights')),
+        tap(_ => this.log('Fetched Scheduled Fights')),
         catchError(this.handleError<ScheduledFlight[]>('getScheduledFlight', []))
       );
   }
@@ -37,7 +37,7 @@ export class ScheduledFlightService {
     const url = `${this.scheduledFlightUrl}/${arivalAirport}/${departureAirport}/${arrivalDate}/${departureDate}`;
     return this.http.get<ScheduledFlight[]>(url)
       .pipe(
-        tap(_ => this.log('fetched Scheduled Fights')),
+        tap(_ => this.log('Fetched Scheduled Fights')),
         catchError(this.handleError<ScheduledFlight[]>('getScheduledFlightByAirportDate', []))
       );
   }
@@ -49,8 +49,8 @@ export class ScheduledFlightService {
   getScheduledFlightByFlightId(id: number): Observable<ScheduledFlight> {
     const url = `${this.scheduledFlightUrl}/${id}`;
     return this.http.get<ScheduledFlight>(url).pipe(
-      tap(_ => this.log(`fetched Scheduled Flight id=${id}`)),
-      catchError(this.handleError<ScheduledFlight>(`getScheduledFlightByFlightId=${id}`))
+      tap(_ => this.log(`Fetched Scheduled Flight id=${id}`)),
+      catchError(this.handleError<ScheduledFlight>(`getScheduledFlightBy FlightId: ${id}`))
     );
   }
 
@@ -59,7 +59,8 @@ export class ScheduledFlightService {
   /** POST: add a new ScheduledFlight to the server */
   addScheduledFlight(scheduledFlight: ScheduledFlight): Observable<ScheduledFlight> {
     return this.http.post<ScheduledFlight>(this.scheduledFlightUrl, scheduledFlight, this.httpOptions).pipe(
-      tap((newScheduledFlight: ScheduledFlight) => this.log(`Made ScheduledFlight with id=${newScheduledFlight.scheduleFlightId}`)),
+      tap((newScheduledFlight: ScheduledFlight) =>
+        this.log(`Made ScheduledFlight with Flight id: ${newScheduledFlight.scheduleFlightId}`)),
       catchError(this.handleError<ScheduledFlight>('addScheduledFlight'))
     );
   }
@@ -68,7 +69,7 @@ export class ScheduledFlightService {
   deleteScheduledFlight(id: number): Observable<ScheduledFlight> {
     const url = `${this.scheduledFlightUrl}/${id}`;
     return this.http.delete<ScheduledFlight>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted Scheduled Flight id=${id}`)),
+      tap(_ => this.log(`Deleted Scheduled Flight id: ${id}`)),
       catchError(this.handleError<ScheduledFlight>('deleteScheduledFlight'))
     );
   }
@@ -77,7 +78,7 @@ export class ScheduledFlightService {
   updateScheduledFlight(scheduledFlight: ScheduledFlight): Observable<any> {
     const url = `${this.scheduledFlightUrl}/${scheduledFlight.scheduleFlightId}`;
     return this.http.put(url, scheduledFlight, this.httpOptions).pipe(
-      tap(_ => this.log(`updated scheduled flight id=${scheduledFlight.scheduleFlightId}`)),
+      tap(_ => this.log(`Updated scheduled flight id: ${scheduledFlight.scheduleFlightId}`)),
       catchError(this.handleError<any>('updateScheduledFlight'))
     );
   }

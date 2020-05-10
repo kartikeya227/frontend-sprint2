@@ -15,6 +15,7 @@ import {AdminAccountComponent} from './admin-panel/admin-account/admin-account.c
 import {UserAccountComponent} from './user-panel/user-account/user-account.component';
 import {UserBookingsComponent} from './user-panel/user-bookings/user-bookings.component';
 import {AdminAirportComponent} from './admin-panel/admin-airport/admin-airport.component';
+import {AdminFlightsComponent} from './admin-panel/admin-flights/admin-flights.component';
 
 
 const routes: Routes = [
@@ -30,7 +31,8 @@ const routes: Routes = [
   { path: 'userpanel/account', component: UserAccountComponent},
   { path: 'adminpanel/account', component: AdminAccountComponent},
   { path: 'userpanel/bookings', component: UserBookingsComponent},
-  { path: 'adminpanel/airports', component: AdminAirportComponent}
+  { path: 'adminpanel/airports', component: AdminAirportComponent},
+  { path: 'adminpanel/flights', component: AdminFlightsComponent}
 
 ];
 

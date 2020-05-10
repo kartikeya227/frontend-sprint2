@@ -27,6 +27,7 @@ import { UserAccountComponent } from './user-panel/user-account/user-account.com
 import { UserBookingsComponent } from './user-panel/user-bookings/user-bookings.component';
 import { AdminAirportComponent } from './admin-panel/admin-airport/admin-airport.component';
 import {AirportsService} from './Service/airports.service';
+import { AdminFlightsComponent } from './admin-panel/admin-flights/admin-flights.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {AirportsService} from './Service/airports.service';
     AdminAccountComponent,
     UserAccountComponent,
     UserBookingsComponent,
-    AdminAirportComponent
+    AdminAirportComponent,
+    AdminFlightsComponent
   ],
   imports: [
     BrowserModule,

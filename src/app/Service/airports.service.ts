@@ -17,7 +17,7 @@ export class AirportsService {
 
   constructor(private http: HttpClient) { }
 
-  /** GET Users from the server */
+  /** GET All Airports from the server */
   getAirports(): Observable<Airport[]> {
     return this.http.get<Airport[]>(this.airportsUrl)
       .pipe(
@@ -31,7 +31,7 @@ export class AirportsService {
     const url = `${this.airportsUrl}/${id}`;
     return this.http.get<Airport>(url).pipe(
       tap(_ => this.log(`fetched Airport id=${id}`)),
-      catchError(this.handleError<Airport>(`getAirport id=${id}`))
+      catchError(this.handleError<Airport>(`getAirport Airport Code: ${id}`))
     );
   }
 
@@ -40,16 +40,16 @@ export class AirportsService {
   /** POST: add a new Airport to the server */
   addAirport(airport: Airport): Observable<Airport> {
     return this.http.post<Airport>(this.airportsUrl, airport, this.httpOptions).pipe(
-      tap((newAirport: Airport) => this.log(`Made Airport with code=${newAirport.airportCode}`)),
+      tap((newAirport: Airport) => this.log(`Made Airport with code: ${newAirport.airportCode}`)),
       catchError(this.handleError<Airport>(`addAirport`))
     );
   }
 
-  /** DELETE: delete the user from the server */
+  /** DELETE: delete the Airport from the server */
   deleteAirport(id: string): Observable<Airport> {
     const url = `${this.airportsUrl}/${id}`;
     return this.http.delete<Airport>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted Airport code=${id}`)),
+      tap(_ => this.log(`Deleted Airport code: ${id}`)),
       catchError(this.handleError<Airport>(`deleteAirport`))
     );
   }
@@ -58,7 +58,7 @@ export class AirportsService {
   updateAirport(airport: Airport): Observable<any> {
     const url = `${this.airportsUrl}/${airport.airportCode}`;
     return this.http.put(url, airport, this.httpOptions).pipe(
-      tap((newAirport: Airport) => this.log(`Updated Airport with code=${newAirport.airportCode}`)),
+      tap((newAirport: Airport) => this.log(`Updated Airport with code: ${newAirport.airportCode}`)),
       catchError(this.handleError<Airport>(`updateAirport`))
     );
   }

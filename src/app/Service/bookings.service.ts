@@ -22,7 +22,7 @@ export class BookingsService {
   getBookings(): Observable<Bookings[]> {
     return this.http.get<Bookings[]>(this.bookingsUrl)
       .pipe(
-        tap(_ => this.log('fetched bookings')),
+        tap(_ => this.log('Fetched bookings')),
         catchError(this.handleError<Bookings[]>(`getBookings`, []))
       );
   }
@@ -32,8 +32,8 @@ export class BookingsService {
     const url = `${this.bookingsUrlUserId}/${id}`;
     return this.http.get<Bookings[]>(url)
       .pipe(
-        tap(_ => this.log('fetched bookings')),
-        catchError(this.handleError<Bookings[]>(`getBookingByUserId=${id}`, []))
+        tap(_ => this.log('Fetched bookings')),
+        catchError(this.handleError<Bookings[]>(`getBooking By UserId: ${id}`, []))
       );
   }
 
@@ -43,7 +43,7 @@ export class BookingsService {
     const url = `${this.bookingsUrl}/${id}`;
     return this.http.get<Bookings>(url).pipe(
       tap(_ => this.log(`fetched Booking id=${id}`)),
-      catchError(this.handleError<Bookings>(`getBooking id=${id}`))
+      catchError(this.handleError<Bookings>(`getBooking id: ${id}`))
     );
   }
 
@@ -52,12 +52,12 @@ export class BookingsService {
   /** POST: add a new booking to the server */
   addBooking(booking: Bookings): Observable<Bookings> {
     return this.http.post<Bookings>(this.bookingsUrl, booking, this.httpOptions).pipe(
-      tap((newBooking: Bookings) => this.log(`Made Booking with id=${newBooking.bookingId}`)),
+      tap((newBooking: Bookings) => this.log(`Made Booking with id: ${newBooking.bookingId}`)),
       catchError(this.handleError<Bookings>(`addBooking`))
     );
   }
 
-  /** DELETE: delete the hero from the server */
+  /** DELETE: delete the Booking from the server */
   deleteBookings(id: number): Observable<Bookings> {
     const url = `${this.bookingsUrl}/${id}`;
     return this.http.delete<Bookings>(url, this.httpOptions).pipe(
@@ -66,11 +66,11 @@ export class BookingsService {
     );
   }
 
-  /** PUT: update the hero on the server */
+  /** PUT: update the Booking on the server */
   updateBookings(booking: Bookings): Observable<any> {
     const url = `${this.bookingsUrl}/${booking.bookingId}`;
     return this.http.put(url, booking, this.httpOptions).pipe(
-      tap((newBooking: Bookings) => this.log(`Updated Booking with id=${newBooking.bookingId}`)),
+      tap((newBooking: Bookings) => this.log(`Updated Booking with id: ${newBooking.bookingId}`)),
       catchError(this.handleError<Bookings>(`addBooking`))
     );
   }

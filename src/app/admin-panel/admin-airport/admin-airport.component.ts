@@ -28,6 +28,8 @@ export class AdminAirportComponent implements OnInit {
   }
 
   getCurrentAirport(i: number): void{
+    this.showAddAirport = false;
+    this.showUpdate = false;
     this.currentAirport = this.airports[i];
     this.showDetails = true;
     this.showAddAirport = false;

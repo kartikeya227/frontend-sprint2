@@ -19,7 +19,7 @@ export class FlightsService {
 
   constructor(private http: HttpClient) { }
 
-  /** GET Airport from the server */
+  /** GET All Flights from the server */
   getFlights(): Observable<Flights[]> {
     return this.http.get<Flights[]>(this.flightsUrl)
       .pipe(
@@ -28,39 +28,39 @@ export class FlightsService {
       );
   }
 
-  /** GET Airports by id. Will 404 if id not found */
+  /** GET Flight by id. Will 404 if id not found */
   getFlight(id: number): Observable<Flights> {
     const url = `${this.flightsUrl}/${id}`;
     return this.http.get<Flights>(url).pipe(
       tap(_ => this.log(`fetched Flight id=${id}`)),
-      catchError(this.handleError<Flights>(`getFlight id=${id}`))
+      catchError(this.handleError<Flights>(`getFlight id: ${id}`))
     );
   }
 
   //////// Save methods //////////
 
-  /** POST: add a new booking to the server */
+  /** POST: add a new Flight to the server */
   addFlight(flight: Flights): Observable<Flights> {
     return this.http.post<Flights>(this.flightsUrl, flight, this.httpOptions).pipe(
-      tap((newflight: Flights) => this.log(`Made Airport with id=${newflight.flightNumber}`)),
+      tap((newflight: Flights) => this.log(`Added new Flight with Flight Number: ${newflight.flightNumber}`)),
       catchError(this.handleError<Flights>(`addFlight`))
     );
   }
 
-  /** DELETE: delete the hero from the server */
+  /** DELETE: delete the Flight from the server */
   deleteFlight(id: number): Observable<Flights> {
     const url = `${this.flightsUrl}/${id}`;
     return this.http.delete<Flights>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted Flight id=${id}`)),
-      catchError(this.handleError<Flights>(`deleteAirport`))
+      tap(_ => this.log(`deleted Flight with Flight Number: ${id}`)),
+      catchError(this.handleError<Flights>(`deleteFlight`))
     );
   }
 
-  /** PUT: update the hero on the server */
+  /** PUT: update the Flight on the server */
   updateFlight(flight: Flights): Observable<any> {
     const url = `${this.flightsUrl}/${flight.flightNumber}`;
     return this.http.put(url, flight, this.httpOptions).pipe(
-      tap((newFlight: Flights) => this.log(`Updated Booking with id=${flight.flightNumber}`)),
+      tap((newFlight: Flights) => this.log(`Updated Flight with Flight Number=${flight.flightNumber}`)),
       catchError(this.handleError<Flights>(`updateFlight`))
     );
   }

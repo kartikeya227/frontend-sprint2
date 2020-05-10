@@ -1,0 +1,144 @@
+<app-admin-panel></app-admin-panel>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="card my-5 col-sm-3 col-md-6 col-lg-4">
+
+      <div *ngIf="!showFlights">
+        <div class="card-header alert-danger font-weight-bolder text-center">No Flights Available.</div>
+      </div>
+
+      <div *ngIf="showFlights" class="card-body">
+        <div class="card-header alert-success font-weight-bolder text-center">List of Available flights.</div>
+        <table class="table table-bordered table-striped">
+          <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Flight Number</th>
+            <th scope="col">Carrier Name</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr (click)="showFlightDetails(i)" *ngFor="let flight of flights; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{ flight.flightNumber }}</td>
+            <td>{{ flight.carrierName }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div>
+          <button (click)="showAddFlight()" type="submit" class="btn btn-info mr-1">Add Flight</button>
+          <hr>
+
+          <form *ngIf="showAdd" (ngSubmit)="addFlight()" #addFlightForm="ngForm">
+            <div class="card-header text-center font-weight-bolder">Enter Flight Details</div>
+            <div class="form-group">
+              <label for="carrierName">Carrier Name</label>
+              <input type="text" [(ngModel)]="currentFlight.carrierName"
+                     class="form-control"
+                     id="carrierName"
+                     name="carrierName"
+                     placeholder="Enter Carrier Name"
+                     required #carrierName="ngModel">
+            </div>
+            <div [hidden]="!carrierName.pristine" class="alert alert-danger">Carrier Name is required</div>
+
+            <div class="form-group">
+              <label for="flightModel">Aircraft Model</label>
+              <input type="text" [(ngModel)]="currentFlight.flightModel"
+                     class="form-control"
+                     id="flightModel"
+                     name="flightModel"
+                     placeholder="Enter Aircraft Model"
+                     required #flightModel="ngModel">
+            </div>
+            <div [hidden]="!flightModel.pristine" class="alert alert-danger">Aircraft Model is required</div>
+
+            <div class="form-group">
+              <label for="seatCapacity">Seat Capacity</label>
+              <input type="number" [(ngModel)]="currentFlight.seatCapacity"
+                     class="form-control"
+                     id="seatCapacity"
+                     name="seatCapacity"
+                     placeholder="Enter Seat Capacity"
+                     required #seatCapacity="ngModel">
+            </div>
+            <div [hidden]="!seatCapacity.pristine" class="alert alert-danger">Seat Capacity is required</div>
+
+            <button type="submit" [disabled]="!addFlightForm.form.valid"
+                    class="btn btn-info">Submit & Add Flight</button>
+          </form>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div *ngIf="showDetails" class="card my-5 col-sm-9 col-md-6 col-lg-8">
+      <div class="card-body">
+        <div class="card-header alert-success font-weight-bolder text-center">Flight Details</div>
+        <table class="table table-bordered table-striped">
+          <thead class="thead-dark">
+
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Field</th>
+            <th scope="col">Value</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>1</td>
+            <td>Flight Number</td>
+            <td>{{currentFlight.flightNumber}}</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Carrier Name</td>
+            <td>{{currentFlight.carrierName}}</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Aircraft Model</td>
+            <td>{{currentFlight.flightModel}}</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Seat Capacity</td>
+            <td>{{currentFlight.seatCapacity}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <button (click)="deleteFlight()" type="submit" class="btn btn-danger mr-1">Delete Flight</button>
+        <button (click)="showUpdateFlight()" type="submit" class="btn btn-info">Update Flight</button>
+        <div *ngIf="showUpdate">
+
+          <div class="card-header alert-success font-weight-bolder text-center">Flight Details</div>
+          <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+              <th scope="col">Flight Number</th>
+              <th scope="col">Carrier Name</th>
+              <th scope="col">Aircraft Model</th>
+              <th scope="col">Seat Capacity</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{ currentFlight.flightNumber}}</td>
+              <td><input [(ngModel)]="currentFlight.carrierName"></td>
+              <td><input [(ngModel)]="currentFlight.flightModel"></td>
+              <td><input [(ngModel)]="currentFlight.seatCapacity"></td>
+            </tr>
+            </tbody>
+          </table>
+          <button  (click)="updateFlight()" type="submit" class="btn btn-info mr-1">Confirm & Update Flight</button>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
