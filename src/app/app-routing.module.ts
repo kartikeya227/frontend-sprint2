@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {Component, NgModule} from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {SignupComponent} from './signup/signup.component';
@@ -16,6 +16,7 @@ import {UserAccountComponent} from './user-panel/user-account/user-account.compo
 import {UserBookingsComponent} from './user-panel/user-bookings/user-bookings.component';
 import {AdminAirportComponent} from './admin-panel/admin-airport/admin-airport.component';
 import {AdminFlightsComponent} from './admin-panel/admin-flights/admin-flights.component';
+import {AdminScheduledFlightComponent} from './admin-panel/admin-scheduled-flight/admin-scheduled-flight.component';
 
 
 const routes: Routes = [
@@ -32,8 +33,8 @@ const routes: Routes = [
   { path: 'adminpanel/account', component: AdminAccountComponent},
   { path: 'userpanel/bookings', component: UserBookingsComponent},
   { path: 'adminpanel/airports', component: AdminAirportComponent},
-  { path: 'adminpanel/flights', component: AdminFlightsComponent}
-
+  { path: 'adminpanel/flights', component: AdminFlightsComponent},
+  { path: 'adminpanel/scheduedflights', component: AdminScheduledFlightComponent}
 ];
 
 @NgModule({

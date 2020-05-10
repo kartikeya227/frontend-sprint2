@@ -7,6 +7,9 @@
 
       <div *ngIf="!showFlights">
         <div class="card-header alert-danger font-weight-bolder text-center">No Flights Available.</div>
+        <hr>
+        <button (click)="showAddFlight()" type="submit" class="btn btn-info mr-1">Add Flight</button>
+
       </div>
 
       <div *ngIf="showFlights" class="card-body">
@@ -31,47 +34,48 @@
           <button (click)="showAddFlight()" type="submit" class="btn btn-info mr-1">Add Flight</button>
           <hr>
 
-          <form *ngIf="showAdd" (ngSubmit)="addFlight()" #addFlightForm="ngForm">
-            <div class="card-header text-center font-weight-bolder">Enter Flight Details</div>
-            <div class="form-group">
-              <label for="carrierName">Carrier Name</label>
-              <input type="text" [(ngModel)]="currentFlight.carrierName"
-                     class="form-control"
-                     id="carrierName"
-                     name="carrierName"
-                     placeholder="Enter Carrier Name"
-                     required #carrierName="ngModel">
-            </div>
-            <div [hidden]="!carrierName.pristine" class="alert alert-danger">Carrier Name is required</div>
 
-            <div class="form-group">
-              <label for="flightModel">Aircraft Model</label>
-              <input type="text" [(ngModel)]="currentFlight.flightModel"
-                     class="form-control"
-                     id="flightModel"
-                     name="flightModel"
-                     placeholder="Enter Aircraft Model"
-                     required #flightModel="ngModel">
-            </div>
-            <div [hidden]="!flightModel.pristine" class="alert alert-danger">Aircraft Model is required</div>
-
-            <div class="form-group">
-              <label for="seatCapacity">Seat Capacity</label>
-              <input type="number" [(ngModel)]="currentFlight.seatCapacity"
-                     class="form-control"
-                     id="seatCapacity"
-                     name="seatCapacity"
-                     placeholder="Enter Seat Capacity"
-                     required #seatCapacity="ngModel">
-            </div>
-            <div [hidden]="!seatCapacity.pristine" class="alert alert-danger">Seat Capacity is required</div>
-
-            <button type="submit" [disabled]="!addFlightForm.form.valid"
-                    class="btn btn-info">Submit & Add Flight</button>
-          </form>
         </div>
       </div>
 
+      <form *ngIf="showAdd" (ngSubmit)="addFlight()" #addFlightForm="ngForm">
+        <div class="card-header text-center font-weight-bolder">Enter Flight Details</div>
+        <div class="form-group">
+          <label for="carrierName">Carrier Name</label>
+          <input type="text" [(ngModel)]="currentFlight.carrierName"
+                 class="form-control"
+                 id="carrierName"
+                 name="carrierName"
+                 placeholder="Enter Carrier Name"
+                 required #carrierName="ngModel">
+        </div>
+        <div [hidden]="!carrierName.pristine" class="alert alert-danger">Carrier Name is required</div>
+
+        <div class="form-group">
+          <label for="flightModel">Aircraft Model</label>
+          <input type="text" [(ngModel)]="currentFlight.flightModel"
+                 class="form-control"
+                 id="flightModel"
+                 name="flightModel"
+                 placeholder="Enter Aircraft Model"
+                 required #flightModel="ngModel">
+        </div>
+        <div [hidden]="!flightModel.pristine" class="alert alert-danger">Aircraft Model is required</div>
+
+        <div class="form-group">
+          <label for="seatCapacity">Seat Capacity</label>
+          <input type="number" [(ngModel)]="currentFlight.seatCapacity"
+                 class="form-control"
+                 id="seatCapacity"
+                 name="seatCapacity"
+                 placeholder="Enter Seat Capacity"
+                 required #seatCapacity="ngModel">
+        </div>
+        <div [hidden]="!seatCapacity.pristine" class="alert alert-danger">Seat Capacity is required</div>
+
+        <button type="submit" [disabled]="!addFlightForm.form.valid"
+                class="btn btn-info">Submit & Add Flight</button>
+      </form>
 
     </div>
 

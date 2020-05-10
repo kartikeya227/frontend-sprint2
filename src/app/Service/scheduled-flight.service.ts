@@ -60,7 +60,7 @@ export class ScheduledFlightService {
   addScheduledFlight(scheduledFlight: ScheduledFlight): Observable<ScheduledFlight> {
     return this.http.post<ScheduledFlight>(this.scheduledFlightUrl, scheduledFlight, this.httpOptions).pipe(
       tap((newScheduledFlight: ScheduledFlight) =>
-        this.log(`Made ScheduledFlight with Flight id: ${newScheduledFlight.scheduleFlightId}`)),
+        this.log(`Made ScheduledFlight with Scheduled Flight id: ${newScheduledFlight.scheduleFlightId}`)),
       catchError(this.handleError<ScheduledFlight>('addScheduledFlight'))
     );
   }
