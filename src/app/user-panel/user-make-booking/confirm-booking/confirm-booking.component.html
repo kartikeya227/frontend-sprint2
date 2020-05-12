@@ -6,7 +6,7 @@
   <div>Enter Passneger details here</div>
   <div class="card my-5">
     <div class="card-body">
-      <form  (ngSubmit)="addPassengers()" #addPassengersForm="ngForm">
+      <form (ngSubmit)="addPassengers()" #addPassengersForm="ngForm">
         <div class="form-group">
           <label for="passengerName">Name</label>
           <input type="text" [(ngModel)]="passenger.passengerName"
@@ -52,7 +52,8 @@
         <div [hidden]="!luggage.pristine" class="alert alert-danger">Weight of Luggage is required</div>
 
         <button type="submit" [disabled]="!addPassengersForm.form.valid"
-                class="btn btn-info">Add Passenger</button>
+                class="btn btn-info">Add Passenger
+        </button>
       </form>
     </div>
   </div>
@@ -75,7 +76,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let passenger of passengers; let i = index">
-          <td>{{i+1}}</td>
+          <td>{{i + 1}}</td>
           <td>{{ passenger.passengerName }}</td>
           <td>{{ passenger.passengerAge }}</td>
           <td>{{ passenger.passengerUin}}</td>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Passengers} from '../../../Model/passengers';
 import {FormGroup} from '@angular/forms';
 import {Bookings} from '../../../Model/bookings';
@@ -20,9 +20,10 @@ export class ConfirmBookingComponent implements OnInit {
   noOfPassengers: number;
   scheduledFlight: ScheduledFlight;
   addedBooking: Bookings;
-  constructor( private globalService: GlobalService,
-               private bookingsService: BookingsService,
-               private scheduledFlightService:ScheduledFlightService) {
+
+  constructor(private globalService: GlobalService,
+              private bookingsService: BookingsService,
+              private scheduledFlightService: ScheduledFlightService) {
     this.passengers = new Array();
     this.passenger = new Passengers();
     this.booking = new Bookings();
@@ -31,28 +32,28 @@ export class ConfirmBookingComponent implements OnInit {
     this.addedBooking = new Bookings();
   }
 
-  addPassengers(): void{
+  addPassengers(): void {
     this.noOfPassengers = this.passengers.push(this.passenger);
-    this.passenger = new  Passengers();
-}
+    this.passenger = new Passengers();
+  }
 
-  makeBooking(): void{
+  makeBooking(): void {
     this.booking.user = this.globalService.getCurrentUser();
     this.booking.passengerList = this.passengers;
     this.booking.noOfPassengers = this.passengers.length;
     this.booking.cost = this.scheduledFlight.costPerTicket * this.passengers.length;
     this.booking.scheduledFlight = this.scheduledFlight;
     this.scheduledFlight.availableSeats = this.scheduledFlight.availableSeats - this.passengers.length;
-    if (this.scheduledFlight.availableSeats >= 0){
-        this.scheduledFlightService.updateScheduledFlight(this.scheduledFlight)
-          .subscribe(value => {
-            this.bookingsService.addBooking(this.booking)
-                  .subscribe(booking => {this.addedBooking = booking;
-                                         alert('Booking Successfully made');
-                  });
+    if (this.scheduledFlight.availableSeats >= 0) {
+      this.scheduledFlightService.updateScheduledFlight(this.scheduledFlight)
+        .subscribe(value => {
+          this.bookingsService.addBooking(this.booking)
+            .subscribe(booking => {
+              this.addedBooking = booking;
+              alert('Booking Successfully made');
+            });
         });
-    }
-    else{
+    } else {
       alert('Booking not possible. Available seats less than number of required seats.');
     }
 

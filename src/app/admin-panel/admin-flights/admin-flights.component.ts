@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Flights} from '../../Model/flights';
 import {FlightsService} from '../../Service/flights.service';
 
@@ -15,6 +15,7 @@ export class AdminFlightsComponent implements OnInit {
   showUpdate: boolean;
   showDetails: boolean;
   showAdd: boolean
+
   constructor(private flightsService: FlightsService) {
     this.showFlights = false;
     this.showDetails = false;
@@ -24,11 +25,11 @@ export class AdminFlightsComponent implements OnInit {
     this.flights = new Array();
   }
 
-  getFlights(): void{
+  getFlights(): void {
     this.flightsService.getFlights()
-      .subscribe(flights =>{
+      .subscribe(flights => {
         this.flights = flights;
-        if(this.flights.length > 0){
+        if (this.flights.length > 0) {
           this.showFlights = true;
           this.showDetails = false;
           this.showUpdate = false;
@@ -36,34 +37,40 @@ export class AdminFlightsComponent implements OnInit {
         }
       });
   }
-  showFlightDetails(i: number){
+
+  showFlightDetails(i: number) {
     this.currentFlight = this.flights[i];
     this.showDetails = true;
     this.showUpdate = false;
     this.showAdd = false;
   }
-  deleteFlight(): void{
+
+  deleteFlight(): void {
     this.flightsService.deleteFlight(this.currentFlight.flightNumber)
       .subscribe(value => {
         this.getFlights();
       });
   }
-  showAddFlight(): void{
+
+  showAddFlight(): void {
     this.showAdd = true;
     this.showDetails = false;
     this.showUpdate = false;
     this.currentFlight = new Flights();
   }
-  addFlight(): void{
+
+  addFlight(): void {
     this.flightsService.addFlight(this.currentFlight)
       .subscribe(value => {
         this.getFlights();
       });
   }
-  showUpdateFlight(){
+
+  showUpdateFlight() {
     this.showUpdate = true;
   }
-  updateFlight(): void{
+
+  updateFlight(): void {
     this.flightsService.updateFlight(this.currentFlight)
       .subscribe(value => {
         this.getFlights();

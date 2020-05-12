@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GlobalService} from '../Service/global.service';
 import {UserService} from '../Service/user.service';
 import {Users} from '../Model/users';
@@ -12,6 +12,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class AdminPanelComponent implements OnInit {
 
   currentUser: Users;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private globalService: GlobalService

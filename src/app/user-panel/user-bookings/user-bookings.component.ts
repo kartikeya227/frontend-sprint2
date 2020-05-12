@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Bookings} from '../../Model/bookings';
 import {BookingsService} from '../../Service/bookings.service';
 import {GlobalService} from '../../Service/global.service';
@@ -15,6 +15,7 @@ export class UserBookingsComponent implements OnInit {
   showUpdate: boolean;
   displayList: boolean;
   noBookings: boolean;
+
   constructor(private  bookingsService: BookingsService,
               private globalService: GlobalService) {
     this.currentBooking = new Bookings();
@@ -27,32 +28,35 @@ export class UserBookingsComponent implements OnInit {
     this.showUpdate = false;
     this.displayList = true;
   }
+
   getBookings(): void {
-    this.bookingsService.getBookingsByUserId(this.globalService.getCurrentUser().userId).
-    subscribe(bookings => {this.bookings = bookings;
-                           this.displayList = true;
-                           if (this.bookings.length > 0){
-                                this.noBookings = false;
-                           }
+    this.bookingsService.getBookingsByUserId(this.globalService.getCurrentUser().userId).subscribe(bookings => {
+      this.bookings = bookings;
+      this.displayList = true;
+      if (this.bookings.length > 0) {
+        this.noBookings = false;
+      }
     });
 
   }
-  getDetails(i: number): void{
+
+  getDetails(i: number): void {
     this.displayDetails = true;
     this.currentBooking = this.bookings[i];
   }
-  updateDetails(): void{
+
+  updateDetails(): void {
     this.showUpdate = true;
   }
-  ConfirmUpdateDetails(): void{
-    this.bookingsService.updateBookings(this.currentBooking).
-    subscribe();
+
+  ConfirmUpdateDetails(): void {
+    this.bookingsService.updateBookings(this.currentBooking).subscribe();
     this.showUpdate = false;
     this.getBookings();
   }
-  deleteBooking(): void{
-    this.bookingsService.deleteBookings(this.currentBooking.bookingId).
-    subscribe(value => {
+
+  deleteBooking(): void {
+    this.bookingsService.deleteBookings(this.currentBooking.bookingId).subscribe(value => {
       this.displayList = false;
       this.displayDetails = false;
       this.currentBooking = new Bookings();

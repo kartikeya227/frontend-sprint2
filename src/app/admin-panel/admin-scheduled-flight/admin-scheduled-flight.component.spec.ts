@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AdminScheduledFlightComponent } from './admin-scheduled-flight.component';
+import {AdminScheduledFlightComponent} from './admin-scheduled-flight.component';
 
 describe('AdminScheduledFlightComponent', () => {
   let component: AdminScheduledFlightComponent;
@@ -8,9 +8,9 @@ describe('AdminScheduledFlightComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminScheduledFlightComponent ]
+      declarations: [AdminScheduledFlightComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

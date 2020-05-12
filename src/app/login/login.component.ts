@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Users} from '../Model/users';
 import {UserService} from '../Service/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GlobalService} from '../Service/global.service';
+import {LoginServiceService} from '../Service/login-service.service';
+import {UserLogin} from '../Model/user-login';
 
 @Component({
   selector: 'app-login',
@@ -12,40 +14,43 @@ import {GlobalService} from '../Service/global.service';
 export class LoginComponent implements OnInit {
   users: Users[];
   currentUser: Users;
+  userLogin: UserLogin;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private userService: UserService,
-              private globalService: GlobalService) {
+              private globalService: GlobalService,
+              private loginService: LoginServiceService) {
     this.currentUser = new Users();
+    this.userLogin = new UserLogin();
   }
 
-  onSubmit(){
-    let i = 0;
-    this.users.forEach(value => {
-      const name = value.userName;
-      const password = value.userPassword;
-      if (name == this.currentUser.userName && password == this.currentUser.userPassword){
-          if (value.userType == 'Admin'){
+  onSubmit(): void {
+    this.userLogin.userName = this.currentUser.userName;
+    this.userLogin.password = this.currentUser.userPassword;
+
+    this.loginService.userLogin(this.userLogin)
+      .subscribe(value => {
+        if (value != null) {
+          alert(this.globalService.getLoginStatus());
+          this.globalService.setCurrentUser(value);
+          this.globalService.setLoginStatus(true);
+          if (value.userType == 'Admin') {
             this.router.navigate(['/adminpanel']);
-            this.globalService.setCurrentUser(value);
-            i = 1;
-          }
-          else if (value.userType == 'User'){
+          } else if (value.userType == 'User') {
             this.router.navigate(['/userpanel']);
             this.globalService.setCurrentUser(value);
-            i = 1;
+          } else {
+            this.globalService.setLoginStatus(false);
           }
-      }
-    });
-    if (i == 0){
-      alert('Invalid username or password!');
-    }
+        } else {
+          this.globalService.setLoginStatus(false);
+        }
+        alert('2' + this.globalService.getLoginStatus());
+      });
   }
 
   ngOnInit(): void {
-    this.userService.getUsers().subscribe(data => {
-      this.users = data;
-    });
   }
 
 }

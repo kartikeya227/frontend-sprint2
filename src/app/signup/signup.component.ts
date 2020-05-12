@@ -12,21 +12,24 @@ export class SignupComponent implements OnInit {
 
   user: Users;
   err: any;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private userService: UserService) {
-      this.user = new Users();
+    this.user = new Users();
   }
 
-  onSubmit(){
+  onSubmit() {
 
     this.userService.addUser(this.user).subscribe(data => {
       this.goToSuccess();
-    }, error => { console.log('opps', error );
-                      });
+    }, error => {
+      console.log('opps', error);
+    });
 
-    }
-  goToSuccess(){
+  }
+
+  goToSuccess() {
     this.router.navigate(['/signupsuccess']);
   }
 

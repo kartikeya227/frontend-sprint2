@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Users} from '../Model/users';
 import {Bookings} from '../Model/bookings';
@@ -8,39 +8,46 @@ import {ScheduledFlight} from '../Model/scheduled-flight';
   providedIn: 'root'
 })
 export class GlobalService {
-  loginStatus = false;
+  loginStatus: boolean;
   currentUser: Users;
   currentScheduledFlight: ScheduledFlight;
+
   constructor() {
     this.currentUser = new Users();
     this.currentScheduledFlight = new ScheduledFlight();
+    this.loginStatus = false;
   }
 
   // Current user----------------------------------------------
-  public setCurrentUser(user: Users){
+  public setCurrentUser(user: Users) {
     this.currentUser = user;
   }
-  public getCurrentUser(): Users{
+
+  public getCurrentUser(): Users {
     return this.currentUser;
   }
+
   // Current User----------------------------------------------
 
   // Current User----------------------------------------------
-  public setScheduledFlight(scheduledFlight: ScheduledFlight): void{
+  public setScheduledFlight(scheduledFlight: ScheduledFlight): void {
     this.currentScheduledFlight = scheduledFlight;
   }
 
-  public getScheduledFlight(): ScheduledFlight{
+  public getScheduledFlight(): ScheduledFlight {
     return this.currentScheduledFlight;
   }
+
   // Current User----------------------------------------------
 
   // Login Status----------------------------------------------
-  public getLoginStatus(): boolean{
+  public getLoginStatus(): boolean {
     return this.loginStatus;
   }
-  public setLoginStatus(){
-    this.loginStatus = !this.loginStatus;
+
+  public setLoginStatus(status: boolean) {
+    this.loginStatus = status;
   }
-  //Login Status----------------------------------------------
+
+  // Login Status----------------------------------------------
 }

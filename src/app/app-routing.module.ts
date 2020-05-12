@@ -1,5 +1,5 @@
 import {Component, NgModule} from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {Routes, RouterModule} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {SignupComponent} from './signup/signup.component';
 import {LandingComponent} from './landing/landing.component';
@@ -17,28 +17,30 @@ import {UserBookingsComponent} from './user-panel/user-bookings/user-bookings.co
 import {AdminAirportComponent} from './admin-panel/admin-airport/admin-airport.component';
 import {AdminFlightsComponent} from './admin-panel/admin-flights/admin-flights.component';
 import {AdminScheduledFlightComponent} from './admin-panel/admin-scheduled-flight/admin-scheduled-flight.component';
+import {AuthgaurdService} from './Service/authgaurd.service';
 
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent},
-  { path: 'signup', component: SignupComponent},
-  { path: '', component: LandingComponent},
-  { path: 'signupsuccess', component: SignupSuccessComponent},
-  { path: 'adminpanel', component: AdminPanelLandingComponent},
-  { path: 'userpanel', component: UserPanelLandingComponent},
-  { path: 'adminpanel/bookings', component: AdminBookingsComponent},
-  { path: 'userpanel/makebookings', component: UserMakeBookingComponent},
-  { path: 'userconfirmbooking', component: ConfirmBookingComponent},
-  { path: 'userpanel/account', component: UserAccountComponent},
-  { path: 'adminpanel/account', component: AdminAccountComponent},
-  { path: 'userpanel/bookings', component: UserBookingsComponent},
-  { path: 'adminpanel/airports', component: AdminAirportComponent},
-  { path: 'adminpanel/flights', component: AdminFlightsComponent},
-  { path: 'adminpanel/scheduedflights', component: AdminScheduledFlightComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'signup', component: SignupComponent},
+  {path: '', component: LandingComponent},
+  {path: 'signupsuccess', component: SignupSuccessComponent},
+  {path: 'adminpanel', component: AdminPanelLandingComponent, canActivate: [AuthgaurdService]},
+  {path: 'userpanel', component: UserPanelLandingComponent, canActivate: [AuthgaurdService]},
+  {path: 'adminpanel/bookings', component: AdminBookingsComponent, canActivate: [AuthgaurdService]},
+  {path: 'userpanel/makebookings', component: UserMakeBookingComponent, canActivate: [AuthgaurdService]},
+  {path: 'userconfirmbooking', component: ConfirmBookingComponent, canActivate: [AuthgaurdService]},
+  {path: 'userpanel/account', component: UserAccountComponent, canActivate: [AuthgaurdService]},
+  {path: 'adminpanel/account', component: AdminAccountComponent, canActivate: [AuthgaurdService]},
+  {path: 'userpanel/bookings', component: UserBookingsComponent, canActivate: [AuthgaurdService]},
+  {path: 'adminpanel/airports', component: AdminAirportComponent, canActivate: [AuthgaurdService]},
+  {path: 'adminpanel/flights', component: AdminFlightsComponent, canActivate: [AuthgaurdService]},
+  {path: 'adminpanel/scheduedflights', component: AdminScheduledFlightComponent, canActivate: [AuthgaurdService]}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

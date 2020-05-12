@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Bookings} from '../../Model/bookings';
 import {BookingsService} from '../../Service/bookings.service';
 
@@ -12,7 +12,8 @@ export class AdminBookingsComponent implements OnInit {
   bookings: Bookings[];
   displayDetails: boolean;
   currentBooking: Bookings;
-  constructor( private  bookingsService: BookingsService) {
+
+  constructor(private  bookingsService: BookingsService) {
     this.currentBooking = new Bookings();
   }
 
@@ -20,10 +21,12 @@ export class AdminBookingsComponent implements OnInit {
     this.getBookings();
     this.displayDetails = false;
   }
+
   getBookings(): void {
     this.bookingsService.getBookings().subscribe(bookings => this.bookings = bookings);
   }
-  getDetails(i: number): void{
+
+  getDetails(i: number): void {
     this.displayDetails = true;
     this.currentBooking = this.bookings[i];
   }

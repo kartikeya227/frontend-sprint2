@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { UserPanelLandingComponent } from './user-panel-landing.component';
+import {UserPanelLandingComponent} from './user-panel-landing.component';
 
 describe('UserPanelLandingComponent', () => {
   let component: UserPanelLandingComponent;
@@ -8,9 +8,9 @@ describe('UserPanelLandingComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserPanelLandingComponent ]
+      declarations: [UserPanelLandingComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

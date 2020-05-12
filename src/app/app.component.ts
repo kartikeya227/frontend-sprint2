@@ -7,6 +7,7 @@ import {Component, Input} from '@angular/core';
 })
 export class AppComponent {
   @Input() title: string;
+
   constructor() {
     this.title = 'Flight Management System';
   }

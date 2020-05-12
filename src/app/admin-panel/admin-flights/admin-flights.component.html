@@ -24,7 +24,7 @@
           </thead>
           <tbody>
           <tr (click)="showFlightDetails(i)" *ngFor="let flight of flights; let i = index">
-            <td>{{i+1}}</td>
+            <td>{{i + 1}}</td>
             <td>{{ flight.flightNumber }}</td>
             <td>{{ flight.carrierName }}</td>
           </tr>
@@ -74,7 +74,8 @@
         <div [hidden]="!seatCapacity.pristine" class="alert alert-danger">Seat Capacity is required</div>
 
         <button type="submit" [disabled]="!addFlightForm.form.valid"
-                class="btn btn-info">Submit & Add Flight</button>
+                class="btn btn-info">Submit & Add Flight
+        </button>
       </form>
 
     </div>
@@ -137,7 +138,7 @@
             </tr>
             </tbody>
           </table>
-          <button  (click)="updateFlight()" type="submit" class="btn btn-info mr-1">Confirm & Update Flight</button>
+          <button (click)="updateFlight()" type="submit" class="btn btn-info mr-1">Confirm & Update Flight</button>
 
         </div>
       </div>

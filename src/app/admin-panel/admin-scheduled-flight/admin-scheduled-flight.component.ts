@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ScheduledFlight} from '../../Model/scheduled-flight';
 import {ScheduledFlightService} from '../../Service/scheduled-flight.service';
 import {Airport} from '../../Model/airport';
@@ -30,6 +30,7 @@ export class AdminScheduledFlightComponent implements OnInit {
   arrivalAirportDisplay: string;
   destinationAirportDisplay: string;
   flightDisplay: string;
+
   constructor(private scheduledFlightService: ScheduledFlightService,
               private airportsService: AirportsService,
               private flightsService: FlightsService) {
@@ -50,7 +51,7 @@ export class AdminScheduledFlightComponent implements OnInit {
     this.flightDisplay = 'Select Flight';
   }
 
-  getScheduledFlight(): void{
+  getScheduledFlight(): void {
     this.scheduledFlightService.getScheduledFlight()
       .subscribe(schdeuledFlight => {
         this.scheduledFlights = schdeuledFlight;
@@ -62,29 +63,33 @@ export class AdminScheduledFlightComponent implements OnInit {
       });
   }
 
-  getCurrentScheduledFlight(i: number): void{
+  getCurrentScheduledFlight(i: number): void {
     this.currentScheduledFlight = this.scheduledFlights[i];
     this.showScheduledFlightDetails();
   }
-  showScheduledFlightDetails(): void{
+
+  showScheduledFlightDetails(): void {
     this.showAdd = false;
     this.showUpdate = false;
     this.showDetails = true;
   }
 
-  getArrivalAirport(i: number): void{
+  getArrivalAirport(i: number): void {
     this.arrivalAirport = this.airports[i];
     this.arrivalAirportDisplay = this.arrivalAirport.airportLocation;
   }
-  getDepartureAirport(i: number): void{
+
+  getDepartureAirport(i: number): void {
     this.departureAirport = this.airports[i];
     this.destinationAirportDisplay = this.departureAirport.airportLocation;
   }
-  getFlight(i: number): void{
+
+  getFlight(i: number): void {
     this.flight = this.flights[i];
     this.flightDisplay = this.flight.carrierName;
   }
-  showAddScheduledFlight(): void{
+
+  showAddScheduledFlight(): void {
     this.airportsService.getAirports()
       .subscribe(airport => {
         this.airports = airport;
@@ -105,7 +110,7 @@ export class AdminScheduledFlightComponent implements OnInit {
       });
   }
 
-  addScheduledFlight(): void{
+  addScheduledFlight(): void {
     this.currentScheduledFlight.availableSeats = this.flight.seatCapacity;
     this.currentScheduledFlight.schedule.sourceAirport = this.arrivalAirport;
     this.currentScheduledFlight.schedule.destinationAirport = this.departureAirport;
@@ -118,7 +123,8 @@ export class AdminScheduledFlightComponent implements OnInit {
         this.getScheduledFlight();
       });
   }
-  showUpdateScheduledFlight(): void{
+
+  showUpdateScheduledFlight(): void {
     this.showAdd = false;
 
     this.airportsService.getAirports()
@@ -134,7 +140,8 @@ export class AdminScheduledFlightComponent implements OnInit {
       });
 
   }
-  updateScheduledFlight(): void{
+
+  updateScheduledFlight(): void {
     this.currentScheduledFlight.flight = this.flight;
     this.currentScheduledFlight.schedule.sourceAirport = this.arrivalAirport;
     this.currentScheduledFlight.schedule.destinationAirport = this.departureAirport;
@@ -144,7 +151,8 @@ export class AdminScheduledFlightComponent implements OnInit {
         this.showDetails = true;
       });
   }
-  deleteScheduledFlight(): void{
+
+  deleteScheduledFlight(): void {
     this.scheduledFlightService.deleteScheduledFlight(this.currentScheduledFlight.scheduleFlightId)
       .subscribe(value => {
         this.getScheduledFlight();

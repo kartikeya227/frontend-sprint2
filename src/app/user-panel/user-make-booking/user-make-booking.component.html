@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col d-flex justify-content-center">
-    <button (click)="allScheduledFlights()"  type="submit" class="btn btn-info mr-1">All Flights</button>
+    <button (click)="allScheduledFlights()" type="submit" class="btn btn-info mr-1">All Flights</button>
     <button (click)="searchScheduledFlight()" type="submit" class="btn btn-info">Search Fights</button>
   </div>
 </div>
@@ -21,7 +21,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let airport of airports; let i = index">
-        <td>{{i+1}}</td>
+        <td>{{i + 1}}</td>
         <td (click)="setSourceAirport(i)">{{ airport.airportLocation}}</td>
         <td (click)="setDestinationAirport(i)">{{ airport.airportLocation }}</td>
       </tr>
@@ -50,7 +50,8 @@
       </div>
       <div [hidden]="!dateTo.pristine" class="alert alert-danger">Date is required</div>
       <button type="submit" [disabled]="!loginForm.form.valid"
-              class="btn btn-info">Prepare Search</button>
+              class="btn btn-info">Prepare Search
+      </button>
     </form>
     <div *ngIf="preparedSearch">
       from{{arrivalAirport}}to{{departureAirport}}timespan--from{{arrivalDate}}to{{departureDate}}
@@ -76,8 +77,11 @@
             <p class="card-text">Available Seats{{scheduledFlight.availableSeats}}/-</p>
             <p class="card-text">From:{{scheduledFlight.schedule.sourceAirport.airportLocation}}</p>
             <p class="card-text">To{{scheduledFlight.schedule.destinationAirport.airportLocation}}</p>
-            <p class="card-text">On{{scheduledFlight.schedule.departureDate}}At{{scheduledFlight.schedule.departureTime}}</p>
-            <button (click)="setCurrentScheduledFlight(scheduledFlight)" type="submit" class="btn btn-info">Book Tickets</button>
+            <p class="card-text">On{{scheduledFlight.schedule.departureDate}}
+              At{{scheduledFlight.schedule.departureTime}}</p>
+            <button (click)="setCurrentScheduledFlight(scheduledFlight)" type="submit" class="btn btn-info">Book
+              Tickets
+            </button>
           </div>
         </div>
 

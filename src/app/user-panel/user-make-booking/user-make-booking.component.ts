@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ScheduledFlight} from '../../Model/scheduled-flight';
 import {ScheduledFlightService} from '../../Service/scheduled-flight.service';
 import {GlobalService} from '../../Service/global.service';
@@ -26,12 +26,13 @@ export class UserMakeBookingComponent implements OnInit {
   d1: any;
   d2: any;
   scheduledFlightSearchByAirportDate: ScheduledFlightSearchByAirportDate;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private scheduledFlightService: ScheduledFlightService,
               private globalService: GlobalService,
               private airportsService: AirportsService) {
-        this.airports = new Array();
+    this.airports = new Array();
   }
 
 
@@ -41,7 +42,7 @@ export class UserMakeBookingComponent implements OnInit {
     this.preparedSearch = false;
   }
 
-  allScheduledFlights(): void{
+  allScheduledFlights(): void {
     this.scheduledFlightsReady = false;
     this.showSelect = false;
     this.scheduledFlightService.getScheduledFlight()
@@ -50,28 +51,30 @@ export class UserMakeBookingComponent implements OnInit {
         this.scheduledFlightsReady = true;
       });
   }
-  searchScheduledFlight(): void{
+
+  searchScheduledFlight(): void {
     this.scheduledFlightsReady = false;
-    this.airportsService.getAirports().
-    subscribe(value => {
+    this.airportsService.getAirports().subscribe(value => {
       this.airports = value;
     });
     this.showSelect = true;
   }
-  prepareSearch(): void{
+
+  prepareSearch(): void {
     this.preparedSearch = true;
     this.arrivalDate = this.d1.toString();
     this.departureDate = this.d2.toString();
   }
 
-  setSourceAirport(i: number): void{
+  setSourceAirport(i: number): void {
     this.arrivalAirport = this.airports[i].airportCode;
   }
-  setDestinationAirport(i: number): void{
+
+  setDestinationAirport(i: number): void {
     this.departureAirport = this.airports[i].airportCode;
   }
 
-  searchFlights(): void{
+  searchFlights(): void {
     this.scheduledFlightService.getScheduledFlightByAirportDate(
       this.arrivalAirport,
       this.departureAirport,
@@ -85,7 +88,7 @@ export class UserMakeBookingComponent implements OnInit {
     });
   }
 
-  setCurrentScheduledFlight(scheduledFlight: ScheduledFlight): void{
+  setCurrentScheduledFlight(scheduledFlight: ScheduledFlight): void {
     this.globalService.setScheduledFlight(scheduledFlight);
     this.router.navigate(['/userconfirmbooking']);
   }

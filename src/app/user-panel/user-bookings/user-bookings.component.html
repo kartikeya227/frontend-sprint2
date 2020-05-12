@@ -16,7 +16,7 @@
           </thead>
           <tbody>
           <tr (click)="getDetails(i)" *ngFor="let booking of bookings; let i = index">
-            <td>{{i+1}}</td>
+            <td>{{i + 1}}</td>
             <td>{{ booking.bookingId}}</td>
             <td>{{ booking.user.userName}}</td>
             <td>{{ booking.noOfPassengers }}</td>
@@ -150,7 +150,7 @@
           </thead>
           <tbody>
           <tr *ngFor="let passenger of currentBooking.passengerList; let i = index">
-            <td>{{i+1}}</td>
+            <td>{{i + 1}}</td>
             <td>{{ passenger.pnrNumber}}</td>
             <td>{{ passenger.passengerName}}</td>
             <td>{{ passenger.luggage}}</td>
@@ -183,7 +183,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let passenger of currentBooking.passengerList; let i = index">
-      <td>{{i+1}}</td>
+      <td>{{i + 1}}</td>
       <td>{{ passenger.pnrNumber}}</td>
       <td><input [(ngModel)]="passenger.passengerName"></td>
       <td><input [(ngModel)]="passenger.luggage"></td>

@@ -1,4 +1,4 @@
-import { ScheduledFlight } from './scheduled-flight';
+import {ScheduledFlight} from './scheduled-flight';
 
 describe('ScheduledFlight', () => {
   it('should create an instance', () => {

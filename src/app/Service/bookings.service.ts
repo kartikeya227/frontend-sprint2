@@ -1,22 +1,23 @@
 // bookingsUrl = 'http://localhost:9090/admin/airport';
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
+import {catchError, map, tap} from 'rxjs/operators';
 import {Bookings} from '../Model/bookings';
 
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class BookingsService {
 
   private bookingsUrl = 'http://localhost:9090/ticket/bookings';  // URL to web api
   private bookingsUrlUserId = 'http://localhost:9090/ticket/bookingsByUserId';
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   /** GET bookings from the server */
   getBookings(): Observable<Bookings[]> {

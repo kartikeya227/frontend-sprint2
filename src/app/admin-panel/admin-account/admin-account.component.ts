@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Users} from '../../Model/users';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../Service/user.service';
@@ -12,6 +12,7 @@ import {GlobalService} from '../../Service/global.service';
 export class AdminAccountComponent implements OnInit {
   userDetails: Users;
   showUpdate: boolean;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private userService: UserService,
@@ -20,7 +21,7 @@ export class AdminAccountComponent implements OnInit {
 
   }
 
-  deleteAccount(): void{
+  deleteAccount(): void {
     this.userService.deleteUser(this.userDetails.userId).subscribe(value2 => {
       this.userDetails = new Users();
       this.globalService.setCurrentUser(new Users());
@@ -28,16 +29,15 @@ export class AdminAccountComponent implements OnInit {
     });
   }
 
-  updateAccount(): void{
+  updateAccount(): void {
     this.showUpdate = true;
   }
 
-  confirmUpdateAccount(): void{
-    this.userService.updateUser(this.userDetails).
-    subscribe(user => {
+  confirmUpdateAccount(): void {
+    this.userService.updateUser(this.userDetails).subscribe(user => {
       this.globalService.setCurrentUser(user);
       this.showUpdate = false;
-  });
+    });
   }
 
   ngOnInit(): void {

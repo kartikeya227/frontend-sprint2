@@ -8,15 +8,20 @@ import {GlobalService} from '../Service/global.service';
 })
 export class NavbarComponent implements OnInit {
   @Input() title: string;
-  loginStatus = this.globalService.getLoginStatus();
-  constructor( protected globalService: GlobalService) {
-  }
+  loginStatus: boolean;
 
-  changeLoginState(){
-    this.globalService.setLoginStatus();
+  constructor(private globalService: GlobalService) {
     this.loginStatus = this.globalService.getLoginStatus();
   }
+
+  changeLoginState(ls: boolean) {
+    this.globalService.setLoginStatus(ls);
+    this.loginStatus = this.globalService.getLoginStatus();
+    alert('logout' + this.globalService.getLoginStatus());
+  }
+
   ngOnInit(): void {
+    this.loginStatus = this.globalService.getLoginStatus();
   }
 
 }

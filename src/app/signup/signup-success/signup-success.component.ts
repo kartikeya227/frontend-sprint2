@@ -10,7 +10,9 @@ import {UserService} from '../../Service/user.service';
 export class SignupSuccessComponent implements OnInit {
 
   users: Users[];
-  constructor(private userService: UserService) { }
+
+  constructor(private userService: UserService) {
+  }
 
   ngOnInit(): void {
     this.userService.getUsers().subscribe(data => {

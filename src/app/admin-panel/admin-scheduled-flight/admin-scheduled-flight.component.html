@@ -24,7 +24,7 @@
           </thead>
           <tbody>
           <tr (click)="getCurrentScheduledFlight(i)" *ngFor="let scheduledFlight of scheduledFlights; let i = index">
-            <td>{{i+1}}</td>
+            <td>{{i + 1}}</td>
             <td>{{ scheduledFlight.scheduleFlightId }}</td>
             <td>{{ scheduledFlight.flight.carrierName }}</td>
             <td>{{ scheduledFlight.schedule.sourceAirport.airportLocation }}</td>
@@ -57,7 +57,7 @@
               </tbody>
             </table>
           </div>
-            <hr>
+          <hr>
 
           <div *ngIf="showAdd">
             <div class="card-header text-center font-weight-bolder">Select Flight</div>
@@ -154,7 +154,8 @@
             <div [hidden]="!departureTime.pristine" class="alert alert-danger">Landing Time is required</div>
 
             <button type="submit" [disabled]="!addScheduledFlightForm.form.valid"
-                    class="btn btn-info">Submit & Schedule Flight</button>
+                    class="btn btn-info">Submit & Schedule Flight
+            </button>
           </form>
         </div>
       </div>
@@ -162,7 +163,7 @@
 
     </div>
 
-    <div  class="card my-5 col-sm-9 col-md-6 col-lg-8">
+    <div class="card my-5 col-sm-9 col-md-6 col-lg-8">
       <div *ngIf="showDetails" class="card-body">
         <div class="card-header alert-success font-weight-bolder text-center">Scheduled Flight Details</div>
         <table class="table table-bordered table-striped">
@@ -262,8 +263,10 @@
           </tr>
           </tbody>
         </table>
-        <button (click)="deleteScheduledFlight()" type="submit" class="btn btn-danger mr-1">Delete Scheduled Flight</button>
-        <button (click)="showUpdateScheduledFlight()" type="submit" class="btn btn-info">Update Scheduled Flight</button>
+        <button (click)="deleteScheduledFlight()" type="submit" class="btn btn-danger mr-1">Delete Scheduled Flight
+        </button>
+        <button (click)="showUpdateScheduledFlight()" type="submit" class="btn btn-info">Update Scheduled Flight
+        </button>
 
 
       </div>
@@ -349,7 +352,9 @@
       </tr>
       </tbody>
     </table>
-    <button  (click)="updateScheduledFlight()" type="submit" class="btn btn-info mr-1">Confirm & Update Scheduled Flight</button>
+    <button (click)="updateScheduledFlight()" type="submit" class="btn btn-info mr-1">Confirm & Update Scheduled
+      Flight
+    </button>
 
   </div>
 </div>

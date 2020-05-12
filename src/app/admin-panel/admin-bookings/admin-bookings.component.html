@@ -3,28 +3,28 @@
 <div class="container-fluid">
   <div class="row">
 
-      <div class="card my-5 col-sm-3 col-md-6 col-lg-4">
-        <div class="card-body">
-          <table class="table table-bordered table-striped">
-            <thead class="thead-dark">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Booking Id</th>
-              <th scope="col">Booked by</th>
-              <th scope="col">Passenger count</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr (click)="getDetails(i)" *ngFor="let booking of bookings; let i = index">
-              <td>{{i+1}}</td>
-              <td>{{ booking.bookingId}}</td>
-              <td>{{ booking.user.userName}}</td>
-              <td>{{ booking.noOfPassengers }}</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
+    <div class="card my-5 col-sm-3 col-md-6 col-lg-4">
+      <div class="card-body">
+        <table class="table table-bordered table-striped">
+          <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Booking Id</th>
+            <th scope="col">Booked by</th>
+            <th scope="col">Passenger count</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr (click)="getDetails(i)" *ngFor="let booking of bookings; let i = index">
+            <td>{{i + 1}}</td>
+            <td>{{ booking.bookingId}}</td>
+            <td>{{ booking.user.userName}}</td>
+            <td>{{ booking.noOfPassengers }}</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
+    </div>
 
     <div *ngIf="displayDetails" class="card my-5 col-sm-9 col-md-6 col-lg-8">
       <div class="card-body">
@@ -150,7 +150,7 @@
           </thead>
           <tbody>
           <tr *ngFor="let passenger of currentBooking.passengerList; let i = index">
-            <td>{{i+1}}</td>
+            <td>{{i + 1}}</td>
             <td>{{ passenger.pnrNumber}}</td>
             <td>{{ passenger.passengerName}}</td>
             <td>{{ passenger.luggage}}</td>
