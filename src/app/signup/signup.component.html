@@ -7,21 +7,22 @@
                class="form-control"
                id="userName"
                name="userName"
+               pattern="[A-Z][a-z]{4}[a-z]{0,10}"
                placeholder="Enter user name"
                required #userName="ngModel">
       </div>
-      <div [hidden]="!userName.pristine" class="alert alert-danger">User name is required</div>
+      <div [hidden]="userName.valid || userName.pristine" class="alert alert-danger">User name is required. Should be starting with capital letter, min 5 max 15.</div>
 
       <div class="form-group">
         <label for="userPassword">Password</label>
-        <input type="text" [(ngModel)]="user.userPassword"
+        <input type="password" [(ngModel)]="user.userPassword"
                class="form-control"
                id="userPassword"
                name="userPassword"
                placeholder="Enter Password"
                required #userPassword="ngModel">
       </div>
-      <div [hidden]="!userPassword.pristine" class="alert alert-danger">Password is required</div>
+      <div [hidden]="userPassword.valid || userPassword.pristine" class="alert alert-danger">Password is required</div>
 
       <div class="form-group">
         <label for="userEmail">Email</label>
@@ -33,30 +34,27 @@
                placeholder="Enter Email"
                required #userEmail="ngModel">
       </div>
-      <div [hidden]="!userEmail.pristine" class="alert alert-danger">Email is required</div>
+      <div [hidden]="userEmail.valid || userEmail.pristine" class="alert alert-danger">Email is required with proper format.</div>
 
       <div class="form-group">
         <label for="userPhone">Phone Number</label>
         <input type="number" [(ngModel)]="user.userPhone"
-               pattern="[0-9]"
                class="form-control"
                id="userPhone"
                name="userPhone"
                placeholder="Enter Phone Number"
+               pattern="[1-9][0-9]{9}"
                required #userPhone="ngModel">
       </div>
-      <div [hidden]="!userPhone.pristine" class="alert alert-danger">Phone Number is required</div>
+      <div [hidden]="userPhone.valid || userPhone.pristine" class="alert alert-danger">Phone Number is required, 10 digit && not starting with 0.</div>
 
       <div class="form-group">
-        <label for="userType">User Type, Admin || User</label>
-        <input type="text" [(ngModel)]="user.userType"
-               class="form-control"
-               id="userType"
-               name="userType"
-               placeholder="Enter user type"
-               required #userType="ngModel">
+        <label>User Type, Admin || User</label>
+        <p>
+          <input type="radio" value="Admin" name="userType" [(ngModel)]="user.userType" required > Admin
+          <input type="radio" value="User" name="userType" [(ngModel)]="user.userType" required > User
+        </p>
       </div>
-      <div [hidden]="!userType.pristine" class="alert alert-danger">User type is required</div>
 
       <button type="submit" [disabled]="!adduserForm.form.valid"
               class="btn btn-info">Submit

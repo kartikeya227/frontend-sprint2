@@ -17,7 +17,8 @@ import {UserBookingsComponent} from './user-panel/user-bookings/user-bookings.co
 import {AdminAirportComponent} from './admin-panel/admin-airport/admin-airport.component';
 import {AdminFlightsComponent} from './admin-panel/admin-flights/admin-flights.component';
 import {AdminScheduledFlightComponent} from './admin-panel/admin-scheduled-flight/admin-scheduled-flight.component';
-import {AuthgaurdService} from './Service/authgaurd.service';
+import {AuthgaurdAdminService} from './Service/authgaurd-admin.service';
+import {AuthgaurdUserService} from './Service/authgaurd-user.service';
 
 
 const routes: Routes = [
@@ -25,17 +26,17 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: '', component: LandingComponent},
   {path: 'signupsuccess', component: SignupSuccessComponent},
-  {path: 'adminpanel', component: AdminPanelLandingComponent, canActivate: [AuthgaurdService]},
-  {path: 'userpanel', component: UserPanelLandingComponent, canActivate: [AuthgaurdService]},
-  {path: 'adminpanel/bookings', component: AdminBookingsComponent, canActivate: [AuthgaurdService]},
-  {path: 'userpanel/makebookings', component: UserMakeBookingComponent, canActivate: [AuthgaurdService]},
-  {path: 'userconfirmbooking', component: ConfirmBookingComponent, canActivate: [AuthgaurdService]},
-  {path: 'userpanel/account', component: UserAccountComponent, canActivate: [AuthgaurdService]},
-  {path: 'adminpanel/account', component: AdminAccountComponent, canActivate: [AuthgaurdService]},
-  {path: 'userpanel/bookings', component: UserBookingsComponent, canActivate: [AuthgaurdService]},
-  {path: 'adminpanel/airports', component: AdminAirportComponent, canActivate: [AuthgaurdService]},
-  {path: 'adminpanel/flights', component: AdminFlightsComponent, canActivate: [AuthgaurdService]},
-  {path: 'adminpanel/scheduedflights', component: AdminScheduledFlightComponent, canActivate: [AuthgaurdService]}
+  {path: 'adminpanel', component: AdminPanelLandingComponent, canActivate: [AuthgaurdAdminService]},
+  {path: 'userpanel', component: UserPanelLandingComponent, canActivate: [AuthgaurdUserService]},
+  {path: 'adminpanel/bookings', component: AdminBookingsComponent, canActivate: [AuthgaurdAdminService]},
+  {path: 'userpanel/makebookings', component: UserMakeBookingComponent, canActivate: [AuthgaurdUserService]},
+  {path: 'userconfirmbooking', component: ConfirmBookingComponent, canActivate: [AuthgaurdUserService]},
+  {path: 'userpanel/account', component: UserAccountComponent, canActivate: [AuthgaurdUserService]},
+  {path: 'adminpanel/account', component: AdminAccountComponent, canActivate: [AuthgaurdAdminService]},
+  {path: 'userpanel/bookings', component: UserBookingsComponent, canActivate: [AuthgaurdUserService]},
+  {path: 'adminpanel/airports', component: AdminAirportComponent, canActivate: [AuthgaurdAdminService]},
+  {path: 'adminpanel/flights', component: AdminFlightsComponent, canActivate: [AuthgaurdAdminService]},
+  {path: 'adminpanel/scheduedflights', component: AdminScheduledFlightComponent, canActivate: [AuthgaurdAdminService]}
 ];
 
 @NgModule({

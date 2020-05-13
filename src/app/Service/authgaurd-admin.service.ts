@@ -5,7 +5,7 @@ import {GlobalService} from './global.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthgaurdService implements CanActivate {
+export class AuthgaurdAdminService implements CanActivate {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -14,7 +14,7 @@ export class AuthgaurdService implements CanActivate {
 
   canActivate() {
     alert('AuthGaurd activated');
-    if (this.globalService.getLoginStatus()) {
+    if (this.globalService.getLoginStatus() && this.globalService.getCurrentUser().userType == 'Admin') {
       return true;
     } else {
       alert('Login required to access the page.')

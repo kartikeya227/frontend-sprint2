@@ -30,7 +30,7 @@ import {AirportsService} from './Service/airports.service';
 import {AdminFlightsComponent} from './admin-panel/admin-flights/admin-flights.component';
 import {AdminScheduledFlightComponent} from './admin-panel/admin-scheduled-flight/admin-scheduled-flight.component';
 import {LoginServiceService} from './Service/login-service.service';
-import {AuthgaurdService} from './Service/authgaurd.service';
+import {AuthgaurdAdminService} from './Service/authgaurd-admin.service';
 
 @NgModule({
   declarations: [
@@ -66,7 +66,7 @@ import {AuthgaurdService} from './Service/authgaurd.service';
     ScheduledFlightService,
     UserService,
     LoginServiceService,
-    AuthgaurdService,
+    AuthgaurdAdminService,
     GlobalService],
   bootstrap: [AppComponent]
 })
