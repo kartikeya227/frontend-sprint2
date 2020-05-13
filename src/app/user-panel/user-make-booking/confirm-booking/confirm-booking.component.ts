@@ -43,17 +43,14 @@ export class ConfirmBookingComponent implements OnInit {
     this.booking.noOfPassengers = this.passengers.length;
     this.booking.cost = this.scheduledFlight.costPerTicket * this.passengers.length;
     this.booking.scheduledFlight = this.scheduledFlight;
-    this.scheduledFlight.availableSeats = this.scheduledFlight.availableSeats - this.passengers.length;
-    if (this.scheduledFlight.availableSeats >= 0) {
-      this.scheduledFlightService.updateScheduledFlight(this.scheduledFlight)
-        .subscribe(value => {
-          this.bookingsService.addBooking(this.booking)
-            .subscribe(booking => {
-              this.addedBooking = booking;
-              alert('Booking Successfully made');
-            });
+    if ((this.scheduledFlight.availableSeats - this.passengers.length) >= 0) {
+      this.bookingsService.addBooking(this.booking)
+        .subscribe(booking => {
+          this.addedBooking = booking;
+          alert('Booking Successfully made');
         });
-    } else {
+    }
+    else {
       alert('Booking not possible. Available seats less than number of required seats.');
     }
 
