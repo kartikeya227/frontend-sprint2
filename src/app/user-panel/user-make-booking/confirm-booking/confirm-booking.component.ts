@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Passengers} from '../../../Model/passengers';
-import {FormGroup} from '@angular/forms';
 import {Bookings} from '../../../Model/bookings';
 import {GlobalService} from '../../../Service/global.service';
 import {ScheduledFlight} from '../../../Model/scheduled-flight';
@@ -20,6 +19,7 @@ export class ConfirmBookingComponent implements OnInit {
   noOfPassengers: number;
   scheduledFlight: ScheduledFlight;
   addedBooking: Bookings;
+  @ViewChild('addPassengersForm') form: any;
 
   constructor(private globalService: GlobalService,
               private bookingsService: BookingsService,
@@ -35,6 +35,7 @@ export class ConfirmBookingComponent implements OnInit {
   addPassengers(): void {
     this.noOfPassengers = this.passengers.push(this.passenger);
     this.passenger = new Passengers();
+    this.form.reset();
   }
 
   makeBooking(): void {
@@ -49,8 +50,7 @@ export class ConfirmBookingComponent implements OnInit {
           this.addedBooking = booking;
           alert('Booking Successfully made');
         });
-    }
-    else {
+    } else {
       alert('Booking not possible. Available seats less than number of required seats.');
     }
 

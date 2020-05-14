@@ -34,129 +34,141 @@
           </tbody>
         </table>
         <div>
-          <button (click)="showAddScheduledFlight()" type="submit" class="btn btn-info mr-1">Add Flight</button>
-          <hr>
-
+          <button (click)="showAddScheduledFlight()" class="btn btn-info mr-1" type="submit">Add Flight</button>
           <div *ngIf="showAdd">
-            <div class="card-header text-center font-weight-bolder">Enter Flight Details</div>
+            <hr>
+            <div>
+              <div class="card-header text-center font-weight-bolder">Enter Flight Details</div>
+              <hr>
+
+              <div class="card-header text-center font-weight-bolder">Select Airports</div>
+              <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Boarding</th>
+                  <th scope="col">Landing</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let airport of airports; let i = index">
+                  <td (click)="getArrivalAirport(i)" class="btn-outline-secondary">{{ airport.airportLocation }}</td>
+                  <td (click)="getDepartureAirport(i)" class="btn-outline-secondary">{{ airport.airportLocation}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
             <hr>
 
-            <div class="card-header text-center font-weight-bolder">Select Airports</div>
+            <div>
+              <div class="card-header text-center font-weight-bolder">Select Flight</div>
+              <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Carrier Name</th>
+                  <th scope="col">Aircraft Model</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr (click)="getFlight(i)" *ngFor="let flight of flights; let i = index" class="btn-outline-secondary">
+                  <td>{{ flight.carrierName }}</td>
+                  <td>{{ flight.flightModel }}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <hr>
             <table class="table table-bordered table-striped">
-              <thead class="thead-dark">
-              <tr>
-                <th scope="col">Boarding</th>
-                <th scope="col">Landing</th>
-              </tr>
-              </thead>
               <tbody>
-              <tr *ngFor="let airport of airports; let i = index">
-                <td (click)="getArrivalAirport(i)" class= "btn-outline-secondary">{{ airport.airportLocation }}</td>
-                <td (click)="getDepartureAirport(i)" class="btn-outline-secondary">{{ airport.airportLocation}}</td>
+              <tr>
+                <td>Boarding Airport</td>
+                <td>{{ arrivalAirportDisplay }}</td>
+              </tr>
+              <tr>
+                <td>Landing Airport</td>
+                <td>{{ destinationAirportDisplay }}</td>
+              </tr>
+              <tr>
+                <td>Flight</td>
+                <td>{{ flightDisplay }}</td>
               </tr>
               </tbody>
             </table>
+            <hr>
+
+            <form #addScheduledFlightForm="ngForm" (ngSubmit)="addScheduledFlight()">
+
+              <div class="form-group">
+                <label for="costPerTicket">Cost per ticket</label>
+                <input #costPerTicket="ngModel" [(ngModel)]="currentScheduledFlight.costPerTicket"
+                       class="form-control"
+                       id="costPerTicket"
+                       name="costPerTicket"
+                       placeholder="Enter Cost per ticket"
+                       required type="number">
+              </div>
+              <div [hidden]="costPerTicket.valid || costPerTicket.pristine" class="alert alert-danger">Cost per ticket
+                is required
+              </div>
+
+              <div class="form-group">
+                <label for="arrivalDate">Boarding Date</label>
+                <input #arrivalDate="ngModel" [(ngModel)]="d1"
+                       class="form-control"
+                       id="arrivalDate"
+                       name="arrivalDate"
+                       placeholder="Enter Boarding Date"
+                       required type="Date">
+              </div>
+              <div [hidden]="arrivalDate.valid || arrivalDate.pristine">Boarding Date is required</div>
+
+              <div class="form-group">
+                <label for="departureDate">Landing Date</label>
+                <input #departureDate="ngModel" [(ngModel)]="d2"
+                       class="form-control"
+                       id="departureDate"
+                       name="departureDate"
+                       placeholder="Enter Landing Date"
+                       required type="Date">
+              </div>
+              <div [hidden]="departureDate.valid || departureDate.pristine" class="alert alert-danger">Landing Date is
+                required
+              </div>
+
+              <div class="form-group">
+                <label for="arrivalTime">Boarding Time</label>
+                <input #arrivalTime="ngModel" [(ngModel)]="currentScheduledFlight.schedule.arrivalTime"
+                       class="form-control"
+                       id="arrivalTime"
+                       name="arrivalTime"
+                       placeholder="Enter Boarding Time"
+                       required type="text">
+              </div>
+              <div [hidden]="arrivalTime.valid || arrivalTime.pristine" class="alert alert-danger">Boarding Time is
+                required
+              </div>
+
+              <div class="form-group">
+                <label for="departureTime">Landing Time</label>
+                <input #departureTime="ngModel" [(ngModel)]="currentScheduledFlight.schedule.departureTime"
+                       class="form-control"
+                       id="departureTime"
+                       name="departureTime"
+                       placeholder="Enter Landing Time"
+                       required type="text">
+              </div>
+              <div [hidden]="departureTime.valid || departureTime.pristine" class="alert alert-danger">Landing Time is
+                required
+              </div>
+
+              <button [disabled]="!(addScheduledFlightForm.form.valid
+                                              && !(arrivalAirportDisplay == 'Select Boarding Airport')
+                                              && !(destinationAirportDisplay == 'Select Landing Airport')
+                                              && !(arrivalAirportDisplay == 'Select Flight'))" class="btn btn-info"
+                      type="submit">Submit & Schedule Flight
+              </button>
+            </form>
           </div>
-          <hr>
-
-          <div *ngIf="showAdd">
-            <div class="card-header text-center font-weight-bolder">Select Flight</div>
-            <table class="table table-bordered table-striped">
-              <thead class="thead-dark">
-              <tr>
-                <th scope="col">Carrier Name</th>
-                <th scope="col">Aircraft Model</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr class= "btn-outline-secondary" (click)="getFlight(i)" *ngFor="let flight of flights; let i = index">
-                <td>{{ flight.carrierName }}</td>
-                <td>{{ flight.flightModel }}</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <hr>
-          <table *ngIf="showAdd" class="table table-bordered table-striped">
-            <tbody>
-            <tr>
-              <td>Boarding Airport</td>
-              <td>{{ arrivalAirportDisplay }}</td>
-            </tr>
-            <tr>
-              <td>Landing Airport</td>
-              <td>{{ destinationAirportDisplay }}</td>
-            </tr>
-            <tr>
-              <td>Flight</td>
-              <td>{{ flightDisplay }}</td>
-            </tr>
-            </tbody>
-          </table>
-          <hr>
-
-          <form *ngIf="showAdd" (ngSubmit)="addScheduledFlight()" #addScheduledFlightForm="ngForm">
-
-            <div class="form-group">
-              <label for="costPerTicket">Cost per ticket</label>
-              <input type="number" [(ngModel)]="currentScheduledFlight.costPerTicket"
-                     class="form-control"
-                     id="costPerTicket"
-                     name="costPerTicket"
-                     placeholder="Enter Cost per ticket"
-                     required #costPerTicket="ngModel">
-            </div>
-            <div [hidden]="costPerTicket.valid || costPerTicket.pristine" class="alert alert-danger">Cost per ticket is required</div>
-
-            <div class="form-group">
-              <label for="arrivalDate">Boarding Date</label>
-              <input type="Date" [(ngModel)]="d1"
-                     class="form-control"
-                     id="arrivalDate"
-                     name="arrivalDate"
-                     placeholder="Enter Boarding Date"
-                     required #arrivalDate="ngModel">
-            </div>
-            <div [hidden]="arrivalDate.valid || arrivalDate.pristine">Boarding Date is required</div>
-
-            <div class="form-group">
-              <label for="departureDate">Landing Date</label>
-              <input type="Date" [(ngModel)]="d2"
-                     class="form-control"
-                     id="departureDate"
-                     name="departureDate"
-                     placeholder="Enter Landing Date"
-                     required #departureDate="ngModel">
-            </div>
-            <div [hidden]="departureDate.valid || departureDate.pristine" class="alert alert-danger">Landing Date is required</div>
-
-            <div class="form-group">
-              <label for="arrivalTime">Boarding Time</label>
-              <input type="text" [(ngModel)]="currentScheduledFlight.schedule.arrivalTime"
-                     class="form-control"
-                     id="arrivalTime"
-                     name="arrivalTime"
-                     placeholder="Enter Boarding Time"
-                     required #arrivalTime="ngModel">
-            </div>
-            <div [hidden]="arrivalTime.valid || arrivalTime.pristine" class="alert alert-danger">Boarding Time is required</div>
-
-            <div class="form-group">
-              <label for="departureTime">Landing Time</label>
-              <input type="text" [(ngModel)]="currentScheduledFlight.schedule.departureTime"
-                     class="form-control"
-                     id="departureTime"
-                     name="departureTime"
-                     placeholder="Enter Landing Time"
-                     required #departureTime="ngModel">
-            </div>
-            <div [hidden]="departureTime.valid || departureTime.pristine" class="alert alert-danger">Landing Time is required</div>
-
-            <button type="submit" [disabled]="!addScheduledFlightForm.form.valid "
-                    class="btn btn-info">Submit & Schedule Flight
-            </button>
-          </form>
         </div>
       </div>
 
@@ -263,9 +275,9 @@
           </tr>
           </tbody>
         </table>
-        <button (click)="deleteScheduledFlight()" type="submit" class="btn btn-danger mr-1">Delete Scheduled Flight
+        <button (click)="deleteScheduledFlight()" class="btn btn-danger mr-1" type="submit">Delete Scheduled Flight
         </button>
-        <button (click)="showUpdateScheduledFlight()" type="submit" class="btn btn-info">Update Scheduled Flight
+        <button (click)="showUpdateScheduledFlight()" class="btn btn-info" type="submit">Update Scheduled Flight
         </button>
 
 
@@ -288,8 +300,8 @@
         </thead>
         <tbody>
         <tr *ngFor="let airport of airports; let i = index">
-          <td (click)="getArrivalAirport(i)">{{ airport.airportLocation }}</td>
-          <td (click)="getDepartureAirport(i)">{{ airport.airportLocation}}</td>
+          <td (click)="getArrivalAirport(i)" class="btn-outline-secondary">{{ airport.airportLocation }}</td>
+          <td (click)="getDepartureAirport(i)" class="btn-outline-secondary">{{ airport.airportLocation}}</td>
         </tr>
         </tbody>
       </table>
@@ -305,7 +317,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr (click)="getFlight(i)" *ngFor="let flight of flights; let i = index">
+        <tr (click)="getFlight(i)" *ngFor="let flight of flights; let i = index" class="btn-outline-secondary">
           <td>{{ flight.carrierName }}</td>
           <td>{{ flight.flightModel }}</td>
         </tr>
@@ -352,7 +364,7 @@
       </tr>
       </tbody>
     </table>
-    <button (click)="updateScheduledFlight()" type="submit" class="btn btn-info mr-1">Confirm & Update Scheduled
+    <button (click)="updateScheduledFlight()" class="btn btn-info mr-1" type="submit">Confirm & Update Scheduled
       Flight
     </button>
 

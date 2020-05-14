@@ -55,7 +55,6 @@ export class AdminScheduledFlightComponent implements OnInit {
     this.scheduledFlightService.getScheduledFlight()
       .subscribe(schdeuledFlight => {
         this.scheduledFlights = schdeuledFlight;
-        //this.currentScheduledFlight = this.scheduledFlights[0];
         this.showScheduledFlights = true;
         this.showAdd = false;
         this.showUpdate = false;
@@ -66,6 +65,7 @@ export class AdminScheduledFlightComponent implements OnInit {
   getCurrentScheduledFlight(i: number): void {
     this.currentScheduledFlight = this.scheduledFlights[i];
     this.showScheduledFlightDetails();
+
   }
 
   showScheduledFlightDetails(): void {
@@ -96,8 +96,6 @@ export class AdminScheduledFlightComponent implements OnInit {
         this.flightsService.getFlights()
           .subscribe(flight => {
             this.flights = flight;
-            // this.currentScheduledFlight = new ScheduledFlight();
-            // this.currentScheduledFlight = this.scheduledFlights[0];
             this.currentScheduledFlight = new ScheduledFlight();
             this.currentScheduledFlight.schedule = new Schedule();
             this.currentScheduledFlight.costPerTicket = 0.0;
@@ -133,7 +131,12 @@ export class AdminScheduledFlightComponent implements OnInit {
         this.flightsService.getFlights()
           .subscribe(flight => {
             this.flights = flight;
-
+            this.arrivalAirportDisplay = this.currentScheduledFlight.schedule.sourceAirport.airportLocation;
+            this.destinationAirportDisplay = this.currentScheduledFlight.schedule.destinationAirport.airportLocation;
+            this.flightDisplay = this.currentScheduledFlight.flight.carrierName;
+            this.arrivalAirport = this.currentScheduledFlight.schedule.sourceAirport;
+            this.departureAirport = this.currentScheduledFlight.schedule.destinationAirport;
+            this.flight = this.currentScheduledFlight.flight;
             this.showAdd = false;
             this.showUpdate = true;
           });
@@ -158,7 +161,6 @@ export class AdminScheduledFlightComponent implements OnInit {
         this.getScheduledFlight();
       });
   }
-
 
   ngOnInit(): void {
     this.getScheduledFlight();

@@ -14,7 +14,7 @@ import {ScheduledFlightSearchByAirportDate} from '../../Model/scheduled-flight-s
 })
 export class UserMakeBookingComponent implements OnInit {
 
-  scheduledFlightsReady: boolean
+  scheduledFlightsReady: boolean;
   showSelect: boolean;
   preparedSearch: boolean;
   scheduledFlights: ScheduledFlight[];

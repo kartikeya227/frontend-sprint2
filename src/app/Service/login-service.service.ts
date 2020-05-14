@@ -10,11 +10,10 @@ import {UserLogin} from '../Model/user-login';
 })
 export class LoginServiceService {
 
-  private loginUrl = 'http://localhost:9090/login';  // URL to web api
-
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
+  private loginUrl = 'http://localhost:9090/login';  // URL to web api
 
   constructor(private http: HttpClient) {
   }

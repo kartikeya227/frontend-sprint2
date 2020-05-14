@@ -46,8 +46,8 @@
       </table>
     </div>
   </div>
-  <button (click)="deleteAccount()" type="submit" class="btn btn-danger mr-1">Delete Account</button>
-  <button (click)="updateAccount()" type="submit" class="btn btn-info">Update Details</button>
+  <button (click)="deleteAccount()" class="btn btn-danger mr-1" type="submit">Delete Account</button>
+  <button (click)="updateAccount()" class="btn btn-info" type="submit">Update Details</button>
 </div>
 <div *ngIf="showUpdate">
   <div class="card my-5">
@@ -96,6 +96,6 @@
       </table>
     </div>
   </div>
-  <button (click)="confirmUpdateAccount()" type="submit" class="btn btn-info">Confirm & Update Account</button>
+  <button (click)="confirmUpdateAccount()" class="btn btn-info" type="submit">Confirm & Update Account</button>
 
 </div>

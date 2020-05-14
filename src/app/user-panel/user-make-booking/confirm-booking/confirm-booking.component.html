@@ -1,58 +1,62 @@
 <app-user-panel></app-user-panel>
 <hr>
-<h1>Enter the passenger details for each passenger</h1>
 <!--Input for passenger details-->
 <div>
-  <div>Enter Passneger details here</div>
-  <div class="card my-5">
+
+  <div class="card mr-5 ml-5">
+    <div class="card-header">Enter Passneger details here</div>
     <div class="card-body">
-      <form (ngSubmit)="addPassengers()" #addPassengersForm="ngForm">
+      <form #addPassengersForm="ngForm" (ngSubmit)="addPassengers()">
         <div class="form-group">
           <label for="passengerName">Name</label>
-          <input type="text" [(ngModel)]="passenger.passengerName"
+          <input #passengerName="ngModel" [(ngModel)]="passenger.passengerName"
                  class="form-control"
                  id="passengerName"
                  name="passengerName"
+                 pattern="[A-Z][a-z]{2,14}[[\s][A-Z][a-z]{0,14}]{0,1}"
                  placeholder="Enter Passenger Name"
-                 required #passengerName="ngModel">
+                 required type="text">
         </div>
-        <div [hidden]="!passengerName.pristine" class="alert alert-danger">Passenger Name is required</div>
+        <div [hidden]="passengerName.valid || passengerName.pristine" class="alert alert-danger">Passenger Name is required, First letter of first name and last name should be capital, last name is optional.</div>
 
         <div class="form-group">
           <label for="passengerAge">Age</label>
-          <input type="number" [(ngModel)]="passenger.passengerAge"
+          <input #passengerAge="ngModel" [(ngModel)]="passenger.passengerAge"
                  class="form-control"
                  id="passengerAge"
                  name="passengerAge"
+                 pattern="[1-9][0-9]{0,2}"
                  placeholder="Enter Age"
-                 required #passengerAge="ngModel">
+                 required type="number">
         </div>
-        <div [hidden]="!passengerAge.pristine" class="alert alert-danger">Passenger's age is required</div>
+        <div [hidden]="passengerAge.valid || passengerAge.pristine" class="alert alert-danger">Passenger's age is required</div>
 
         <div class="form-group">
           <label for="passengerUin">Unique Id Number</label>
-          <input type="number" [(ngModel)]="passenger.passengerUin"
+          <input #passengerUin="ngModel" [(ngModel)]="passenger.passengerUin"
                  class="form-control"
                  id="passengerUin"
                  name="passengerUin"
+                 pattern="[1-9][0-9]{11}"
                  placeholder="Enter Unique Id Number"
-                 required #passengerUin="ngModel">
+                 required type="number">
         </div>
-        <div [hidden]="!passengerUin.pristine" class="alert alert-danger">Unique Id Number is required</div>
+        <div [hidden]="passengerUin.valid || passengerUin.pristine" class="alert alert-danger">Aadhaar number is required, 12 digits</div>
 
         <div class="form-group">
           <label for="luggage">Weight of Luggage</label>
-          <input type="number" [(ngModel)]="passenger.luggage"
+          <input #luggage="ngModel" [(ngModel)]="passenger.luggage"
                  class="form-control"
                  id="luggage"
                  name="luggage"
+                 pattern="[0-9][0-9]{0,1}[.][0-9][0-9]"
                  placeholder="Enter Weight of Luggage"
-                 required #luggage="ngModel">
+                 required type="number">
         </div>
-        <div [hidden]="!luggage.pristine" class="alert alert-danger">Weight of Luggage is required</div>
+        <div [hidden]="luggage.valid || luggage.pristine"  class="alert alert-danger">Weight of Luggage is required, not greater than 100KG. accuracy upto two decimal places.</div>
 
-        <button type="submit" [disabled]="!addPassengersForm.form.valid"
-                class="btn btn-info">Add Passenger
+        <button [disabled]="!addPassengersForm.form.valid" class="btn btn-info"
+                type="submit">Add Passenger
         </button>
       </form>
     </div>
@@ -60,9 +64,10 @@
 
 </div>
 <!--Already entered passengers-->
-<div>
-  <div>Lisof Passengers entered till now.</div>
-  <div class="card my-5">
+<div class="mr-5 ml-5">
+
+  <div class="card mr-5 ml-5>">
+    <div class="card-header">List of Passengers entered till now.</div>
     <div class="card-body">
       <table class="table table-bordered table-striped">
         <thead class="thead-dark">
@@ -86,5 +91,6 @@
       </table>
     </div>
   </div>
+  <button [disabled]="passengers.length <= 0 || passengers.length > 10" (click)="makeBooking()" class="btn btn-info ml-5" type="submit">Confirm & Book</button>
 </div>
-<button (click)="makeBooking()" type="submit" class="btn btn-info">Confirm & Book</button>
+

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GlobalService} from './global.service';
 
@@ -9,14 +9,15 @@ export class AuthgaurdUserService {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private globalService: GlobalService) { }
+              private globalService: GlobalService) {
+  }
 
   canActivate() {
     alert('AuthGaurd activated');
     if (this.globalService.getLoginStatus() && this.globalService.getCurrentUser().userType == 'User') {
       return true;
     } else {
-      alert('Login required to access the page.')
+      alert('Login required to access the page.');
       this.router.navigate(['/login']);
       return false;
     }

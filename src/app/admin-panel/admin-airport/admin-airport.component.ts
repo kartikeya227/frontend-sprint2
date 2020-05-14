@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Airport} from '../../Model/airport';
 import {AirportsService} from '../../Service/airports.service';
-import {Users} from '../../Model/users';
 
 @Component({
   selector: 'app-admin-airport',

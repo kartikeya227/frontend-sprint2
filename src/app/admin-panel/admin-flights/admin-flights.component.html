@@ -8,7 +8,7 @@
       <div *ngIf="!showFlights">
         <div class="card-header alert-danger font-weight-bolder text-center">No Flights Available.</div>
         <hr>
-        <button (click)="showAddFlight()" type="submit" class="btn btn-info mr-1">Add Flight</button>
+        <button (click)="showAddFlight()" class="btn btn-info mr-1" type="submit">Add Flight</button>
 
       </div>
 
@@ -31,50 +31,50 @@
           </tbody>
         </table>
         <div>
-          <button (click)="showAddFlight()" type="submit" class="btn btn-info mr-1">Add Flight</button>
+          <button (click)="showAddFlight()" class="btn btn-info mr-1" type="submit">Add Flight</button>
           <hr>
 
 
         </div>
       </div>
 
-      <form *ngIf="showAdd" (ngSubmit)="addFlight()" #addFlightForm="ngForm">
+      <form #addFlightForm="ngForm" (ngSubmit)="addFlight()" *ngIf="showAdd">
         <div class="card-header text-center font-weight-bolder">Enter Flight Details</div>
         <div class="form-group">
           <label for="carrierName">Carrier Name</label>
-          <input type="text" [(ngModel)]="currentFlight.carrierName"
+          <input #carrierName="ngModel" [(ngModel)]="currentFlight.carrierName"
                  class="form-control"
                  id="carrierName"
                  name="carrierName"
                  placeholder="Enter Carrier Name"
-                 required #carrierName="ngModel">
+                 required type="text">
         </div>
         <div [hidden]="!carrierName.pristine" class="alert alert-danger">Carrier Name is required</div>
 
         <div class="form-group">
           <label for="flightModel">Aircraft Model</label>
-          <input type="text" [(ngModel)]="currentFlight.flightModel"
+          <input #flightModel="ngModel" [(ngModel)]="currentFlight.flightModel"
                  class="form-control"
                  id="flightModel"
                  name="flightModel"
                  placeholder="Enter Aircraft Model"
-                 required #flightModel="ngModel">
+                 required type="text">
         </div>
         <div [hidden]="!flightModel.pristine" class="alert alert-danger">Aircraft Model is required</div>
 
         <div class="form-group">
           <label for="seatCapacity">Seat Capacity</label>
-          <input type="number" [(ngModel)]="currentFlight.seatCapacity"
+          <input #seatCapacity="ngModel" [(ngModel)]="currentFlight.seatCapacity"
                  class="form-control"
                  id="seatCapacity"
                  name="seatCapacity"
                  placeholder="Enter Seat Capacity"
-                 required #seatCapacity="ngModel">
+                 required type="number">
         </div>
         <div [hidden]="!seatCapacity.pristine" class="alert alert-danger">Seat Capacity is required</div>
 
-        <button type="submit" [disabled]="!addFlightForm.form.valid"
-                class="btn btn-info">Submit & Add Flight
+        <button [disabled]="!addFlightForm.form.valid" class="btn btn-info"
+                type="submit">Submit & Add Flight
         </button>
       </form>
 
@@ -115,8 +115,8 @@
           </tr>
           </tbody>
         </table>
-        <button (click)="deleteFlight()" type="submit" class="btn btn-danger mr-1">Delete Flight</button>
-        <button (click)="showUpdateFlight()" type="submit" class="btn btn-info">Update Flight</button>
+        <button (click)="deleteFlight()" class="btn btn-danger mr-1" type="submit">Delete Flight</button>
+        <button (click)="showUpdateFlight()" class="btn btn-info" type="submit">Update Flight</button>
         <div *ngIf="showUpdate">
 
           <div class="card-header alert-success font-weight-bolder text-center">Flight Details</div>
@@ -138,7 +138,7 @@
             </tr>
             </tbody>
           </table>
-          <button (click)="updateFlight()" type="submit" class="btn btn-info mr-1">Confirm & Update Flight</button>
+          <button (click)="updateFlight()" class="btn btn-info mr-1" type="submit">Confirm & Update Flight</button>
 
         </div>
       </div>

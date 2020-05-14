@@ -14,7 +14,7 @@ export class AdminFlightsComponent implements OnInit {
   showFlights: boolean;
   showUpdate: boolean;
   showDetails: boolean;
-  showAdd: boolean
+  showAdd: boolean;
 
   constructor(private flightsService: FlightsService) {
     this.showFlights = false;

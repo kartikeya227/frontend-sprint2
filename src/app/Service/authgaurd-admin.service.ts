@@ -17,7 +17,7 @@ export class AuthgaurdAdminService implements CanActivate {
     if (this.globalService.getLoginStatus() && this.globalService.getCurrentUser().userType == 'Admin') {
       return true;
     } else {
-      alert('Login required to access the page.')
+      alert('Login required to access the page.');
       this.router.navigate(['/login']);
       return false;
     }

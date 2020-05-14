@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
 import {Users} from '../Model/users';
-import {Bookings} from '../Model/bookings';
 import {ScheduledFlight} from '../Model/scheduled-flight';
 
 @Injectable({

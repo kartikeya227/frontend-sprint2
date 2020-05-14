@@ -3,18 +3,18 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {Observable, of} from 'rxjs';
-import {catchError, map, tap} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 import {Bookings} from '../Model/bookings';
 
 
 @Injectable({providedIn: 'root'})
 export class BookingsService {
 
-  private bookingsUrl = 'http://localhost:9090/ticket/bookings';  // URL to web api
-  private bookingsUrlUserId = 'http://localhost:9090/ticket/bookingsByUserId';
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
+  private bookingsUrl = 'http://localhost:9090/ticket/bookings';  // URL to web api
+  private bookingsUrlUserId = 'http://localhost:9090/ticket/bookingsByUserId';
 
   constructor(private http: HttpClient) {
   }

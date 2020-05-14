@@ -9,11 +9,10 @@ import {Airport} from '../Model/airport';
 })
 export class AirportsService {
 
-  private airportsUrl = 'http://localhost:9090/admin/airport';  // URL to web api
-
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
+  private airportsUrl = 'http://localhost:9090/admin/airport';  // URL to web api
 
   constructor(private http: HttpClient) {
   }

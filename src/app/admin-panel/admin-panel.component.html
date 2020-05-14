@@ -1,19 +1,19 @@
 <nav class="navbar navbar-light bg-light justify-content-between">
-  <a class="navbar-brand" href="#">
-    <img src="../../assets/images/namaste.png" width="30" height="30" class="d-inline-block align-top" alt="">
+  <a class="navbar-brand" routerLink="/adminpanel">
+    <img alt="" class="d-inline-block align-top" height="30" src="../../assets/images/namaste.png" width="30">
     Welcome&nbsp;{{currentUser.userName}}
   </a>
 
   <form class="form-inline">
-    <button routerLink="/adminpanel/account" class="btn btn-outline-success my-2 my-sm-0 mr-1" type="submit">Account
+    <button class="btn btn-outline-success my-2 my-sm-0 mr-1" routerLink="/adminpanel/account" type="submit">Account
     </button>
-    <button routerLink="/adminpanel/bookings" class="btn btn-outline-success my-2 my-sm-0 mr-1" type="submit">Bookings
+    <button class="btn btn-outline-success my-2 my-sm-0 mr-1" routerLink="/adminpanel/bookings" type="submit">Bookings
     </button>
-    <button routerLink="/adminpanel/airports" class="btn btn-outline-success my-2 my-sm-0 mr-1" type="submit">Airports
+    <button class="btn btn-outline-success my-2 my-sm-0 mr-1" routerLink="/adminpanel/airports" type="submit">Airports
     </button>
-    <button routerLink="/adminpanel/flights" class="btn btn-outline-success my-2 my-sm-0 mr-1" type="submit">Flights
+    <button class="btn btn-outline-success my-2 my-sm-0 mr-1" routerLink="/adminpanel/flights" type="submit">Flights
     </button>
-    <button routerLink="/adminpanel/scheduedflights" class="btn btn-outline-success my-2 my-sm-0 mr-1" type="submit">
+    <button class="btn btn-outline-success my-2 my-sm-0 mr-1" routerLink="/adminpanel/scheduedflights" type="submit">
       Scheduled Flights
     </button>
   </form>

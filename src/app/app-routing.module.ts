@@ -1,11 +1,9 @@
-import {Component, NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {SignupComponent} from './signup/signup.component';
 import {LandingComponent} from './landing/landing.component';
 import {SignupSuccessComponent} from './signup/signup-success/signup-success.component';
-import {AdminPanelComponent} from './admin-panel/admin-panel.component';
-import {UserPanelComponent} from './user-panel/user-panel.component';
 import {AdminPanelLandingComponent} from './admin-panel/admin-panel-landing/admin-panel-landing.component';
 import {UserPanelLandingComponent} from './user-panel/user-panel-landing/user-panel-landing.component';
 import {AdminBookingsComponent} from './admin-panel/admin-bookings/admin-bookings.component';

@@ -2,11 +2,10 @@
 
 <div class="row">
   <div class="col d-flex justify-content-center">
-    <button (click)="allScheduledFlights()" type="submit" class="btn btn-info mr-1">All Flights</button>
-    <button (click)="searchScheduledFlight()" type="submit" class="btn btn-info">Search Fights</button>
+    <button (click)="allScheduledFlights()" class="btn btn-info mr-1" type="submit">All Flights</button>
+    <button (click)="searchScheduledFlight()" class="btn btn-info" type="submit">Search Fights</button>
   </div>
 </div>
-<hr>
 
 <div *ngIf="showSelect" class="card my-5">
   <div class="card-header"> Enter the Details to Search Flights</div>
@@ -22,72 +21,70 @@
       <tbody>
       <tr *ngFor="let airport of airports; let i = index">
         <td>{{i + 1}}</td>
-        <td (click)="setSourceAirport(i)">{{ airport.airportLocation}}</td>
-        <td (click)="setDestinationAirport(i)">{{ airport.airportLocation }}</td>
+        <td class="btn-outline-secondary" (click)="setSourceAirport(i)">{{ airport.airportLocation}}</td>
+        <td class="btn-outline-secondary" (click)="setDestinationAirport(i)">{{ airport.airportLocation }}</td>
       </tr>
       </tbody>
     </table>
     <div class="card-header"> Select a Time Span for the flights to be viewed.</div>
-    <form (ngSubmit)="prepareSearch()" #loginForm="ngForm">
+    <form #loginForm="ngForm" (ngSubmit)="prepareSearch()">
       <div class="form-group">
         <label>Starting Date</label>
-        <input type="date" [(ngModel)]="d1"
+        <input #dateFrom="ngModel" [(ngModel)]="d1"
                class="form-control"
                id="dateFrom"
                name="dateFrom"
                placeholder="Enter Date"
-               required #dateFrom="ngModel">
+               required type="date">
       </div>
       <div [hidden]="!dateFrom.pristine" class="alert alert-danger">Date is required</div>
       <div class="form-group">
         <label>Starting Date</label>
-        <input type="date" [(ngModel)]="d2"
+        <input #dateTo="ngModel" [(ngModel)]="d2"
                class="form-control"
                id="dateTo"
                name="dateTo"
                placeholder="Enter Date"
-               required #dateTo="ngModel">
+               required type="date">
       </div>
       <div [hidden]="!dateTo.pristine" class="alert alert-danger">Date is required</div>
-      <button type="submit" [disabled]="!loginForm.form.valid"
-              class="btn btn-info">Prepare Search
+      <button [disabled]="!loginForm.form.valid" class="btn btn-info"
+              type="submit">Prepare Search
       </button>
     </form>
     <div *ngIf="preparedSearch">
       from{{arrivalAirport}}to{{departureAirport}}timespan--from{{arrivalDate}}to{{departureDate}}
-      <button (click)="searchFlights()" type="submit" class="btn btn-info">Search Flights!</button>
+      <button (click)="searchFlights()" class="btn btn-info" type="submit">Search Flights!</button>
 
     </div>
   </div>
 </div>
 
-<main *ngIf="scheduledFlightsReady">
-  <div class="alert-success text-center font-weight-bolder">All available Scheduled Flights</div>
 
-  <div class="container-fluid">
-    <div class="row">
 
-      <div *ngFor="let scheduledFlight of scheduledFlights" class="col-sm-4">
 
-        <div class="card">
-          <div class="card-body text-center">
-            <h5 class="card-title">Flight Id:{{scheduledFlight.scheduleFlightId}}</h5>
-            <p class="card-text">Carrier Name{{scheduledFlight.flight.carrierName}}</p>
-            <p class="card-text">Price{{scheduledFlight.costPerTicket}}/-</p>
-            <p class="card-text">Available Seats{{scheduledFlight.availableSeats}}/-</p>
-            <p class="card-text">From:{{scheduledFlight.schedule.sourceAirport.airportLocation}}</p>
-            <p class="card-text">To{{scheduledFlight.schedule.destinationAirport.airportLocation}}</p>
-            <p class="card-text">On{{scheduledFlight.schedule.departureDate}}
-              At{{scheduledFlight.schedule.departureTime}}</p>
-            <button (click)="setCurrentScheduledFlight(scheduledFlight)" type="submit" class="btn btn-info">Book
-              Tickets
-            </button>
-          </div>
-        </div>
 
-      </div>
-
+<div class="container" *ngIf="scheduledFlightsReady">
+  <div class="alert-success text-center font-weight-bolder pt-2 pb-2 mt-3 mb-3">
+    All available Scheduled Flights
     </div>
-  </div>
-
-</main>
+    <div class="row justify-content-center">
+    <div class="card-deck col-sm-4" *ngFor="let scheduledFlight of scheduledFlights">
+      <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+        <div class="card-header">Fly with&nbsp;{{scheduledFlight.flight.carrierName}}</div>
+        <div class="card-body">
+          <h5 class="card-title">From: 	&nbsp;
+            {{scheduledFlight.schedule.sourceAirport.airportLocation}}&nbsp;
+            to&nbsp;{{scheduledFlight.schedule.destinationAirport.airportLocation}}</h5>
+          <p class="card-text">Price:	&nbsp;{{scheduledFlight.costPerTicket}}/-</p>
+          <p class="card-text">Available Seats:	&nbsp;{{scheduledFlight.availableSeats}}</p>
+          <p class="card-text">Date:	&nbsp;{{scheduledFlight.schedule.departureDate}}</p>
+          <p class="card-text">Time:&nbsp;{{scheduledFlight.schedule.departureTime}}</p>
+        </div>
+        <button (click)="setCurrentScheduledFlight(scheduledFlight)" class="btn btn-info" type="submit">Book
+          Tickets
+        </button>
+      </div>
+    </div>
+    </div>
+</div>

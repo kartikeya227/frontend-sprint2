@@ -159,8 +159,8 @@
           </tr>
           </tbody>
         </table>
-        <button (click)="deleteBooking()" type="submit" class="btn btn-info mr-1">Delete Booking</button>
-        <button (click)="updateDetails()" type="submit" class="btn btn-info">Update Booking</button>
+        <button (click)="deleteBooking()" class="btn btn-info mr-1" type="submit">Delete Booking</button>
+        <button (click)="updateDetails()" class="btn btn-info" type="submit">Update Booking</button>
       </div>
     </div>
   </div>
@@ -192,7 +192,7 @@
     </tr>
     </tbody>
   </table>
-  <button (click)="ConfirmUpdateDetails()" type="submit" class="btn btn-info mr-1">Confirm & Update Booking</button>
+  <button (click)="ConfirmUpdateDetails()" class="btn btn-info mr-1" type="submit">Confirm & Update Booking</button>
 
 </div>
 <div *ngIf="noBookings" class="alert-danger"> No Bookings made yet</div>
