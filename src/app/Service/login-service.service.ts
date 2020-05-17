@@ -1,3 +1,7 @@
+/** *
+ * Service for Login Http requests
+ * loginUrl = 'http://localhost:9090/login'
+ */
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Users} from '../Model/users';
@@ -54,6 +58,6 @@ export class LoginServiceService {
   }
 
   private log(message: string) {
-    alert('Server message:' + message);
+    console.log('Server message:' + message);
   }
 }

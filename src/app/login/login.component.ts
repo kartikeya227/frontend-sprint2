@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Users} from '../Model/users';
 import {UserService} from '../Service/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   users: Users[];
   currentUser: Users;
   userLogin: UserLogin;
+  @ViewChild('loginForm') form: any;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -28,11 +29,10 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     this.userLogin.userName = this.currentUser.userName;
     this.userLogin.password = this.currentUser.userPassword;
-
+    this.form.reset();
     this.loginService.userLogin(this.userLogin)
       .subscribe(value => {
         if (value != null) {
-          alert(this.globalService.getLoginStatus());
           this.globalService.setCurrentUser(value);
           this.globalService.setLoginStatus(true);
           if (value.userType == 'Admin') {
@@ -46,7 +46,6 @@ export class LoginComponent implements OnInit {
         } else {
           this.globalService.setLoginStatus(false);
         }
-        alert('2' + this.globalService.getLoginStatus());
       });
   }
 

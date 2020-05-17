@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {GlobalService} from '../../Service/global.service';
 
 @Component({
   selector: 'app-user-panel-landing',
@@ -7,10 +8,13 @@ import {Component, OnInit} from '@angular/core';
 })
 export class UserPanelLandingComponent implements OnInit {
 
-  constructor() {
+  name: string;
+
+  constructor(private globalService: GlobalService) {
   }
 
   ngOnInit(): void {
+    this.name = this.globalService.getCurrentUser().userName;
   }
 
 }

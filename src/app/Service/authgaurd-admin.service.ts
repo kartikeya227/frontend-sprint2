@@ -12,8 +12,10 @@ export class AuthgaurdAdminService implements CanActivate {
               private globalService: GlobalService) {
   }
 
+  /** *
+   * Auth gaurd for Admin exclusive routes.
+   */
   canActivate() {
-    alert('AuthGaurd activated');
     if (this.globalService.getLoginStatus() && this.globalService.getCurrentUser().userType == 'Admin') {
       return true;
     } else {

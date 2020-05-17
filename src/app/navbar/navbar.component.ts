@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {GlobalService} from '../Service/global.service';
+import {Users} from '../Model/users';
 
 @Component({
   selector: 'app-navbar',
@@ -9,6 +10,7 @@ import {GlobalService} from '../Service/global.service';
 export class NavbarComponent implements OnInit {
   @Input() title: string;
   loginStatus: boolean;
+  currentuser: Users;
 
   constructor(private globalService: GlobalService) {
     this.loginStatus = this.globalService.getLoginStatus();
@@ -22,6 +24,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginStatus = this.globalService.getLoginStatus();
+    this.currentuser = this.globalService.getCurrentUser();
   }
 
 }

@@ -18,6 +18,9 @@ export class AdminAirportComponent implements OnInit {
     this.currentAirport = new Airport();
   }
 
+  /**
+   * Method to call service to fetch all airports.
+   */
   getAirport(): void {
     this.airportsService.getAirports()
       .subscribe(value => {
@@ -28,6 +31,9 @@ export class AdminAirportComponent implements OnInit {
       });
   }
 
+  /**
+   * Method to set currently clicked airport by user.
+   */
   getCurrentAirport(i: number): void {
     this.showAddAirport = false;
     this.showUpdate = false;
@@ -36,6 +42,9 @@ export class AdminAirportComponent implements OnInit {
     this.showAddAirport = false;
   }
 
+  /**
+   * Method to Update DOM with form to add new airport
+   */
   addAirportShow(): void {
     this.showAddAirport = true;
     this.showUpdate = false;
@@ -44,6 +53,9 @@ export class AdminAirportComponent implements OnInit {
     this.showDetails = false;
   }
 
+  /**
+   * Method to call service to update the new airport to DOM
+   */
   addAirport(): void {
     this.showDetails = false;
     this.airportsService.addAirport(this.currentAirport)
@@ -53,6 +65,9 @@ export class AdminAirportComponent implements OnInit {
       });
   }
 
+  /**
+   * Method to call service To Delete Airport from Database
+   */
   deleteAirport(): void {
     this.airportsService.deleteAirport(this.currentAirport.airportCode)
       .subscribe(value => {
@@ -60,11 +75,18 @@ export class AdminAirportComponent implements OnInit {
       });
   }
 
+  /**
+   * Method to Update DOM with form to take input for updating the airport
+   */
   updateAirport(): void {
     this.showUpdate = true;
+    this.showDetails = false;
     this.showAddAirport = false;
   }
 
+  /**
+   * Method to call service for updating the airport to database.
+   */
   confirmUpdate(): void {
     this.airportsService.updateAirport(this.currentAirport)
       .subscribe(value => {
@@ -75,6 +97,9 @@ export class AdminAirportComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAirport();
+    this.showDetails = false;
+    this.showUpdate = false;
+    this.showAddAirport = false;
   }
 
 }

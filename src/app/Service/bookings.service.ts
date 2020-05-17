@@ -1,4 +1,7 @@
-// bookingsUrl = 'http://localhost:9090/admin/airport';
+/** *
+ * Service for Booking Http requests
+ * bookingsUrl = 'http://localhost:9090/admin/airport';
+ */
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
@@ -48,7 +51,6 @@ export class BookingsService {
     );
   }
 
-  //////// Save methods //////////
 
   /** POST: add a new booking to the server */
   addBooking(booking: Bookings): Observable<Bookings> {
@@ -97,6 +99,6 @@ export class BookingsService {
   }
 
   private log(message: string) {
-    alert('Server message:' + message);
+    console.log('Server message:' + message);
   }
 }

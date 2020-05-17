@@ -18,6 +18,11 @@ import {AdminScheduledFlightComponent} from './admin-panel/admin-scheduled-fligh
 import {AuthgaurdAdminService} from './Service/authgaurd-admin.service';
 import {AuthgaurdUserService} from './Service/authgaurd-user.service';
 
+/**
+ * Mapping of components with their respective routes.
+ * to be used for router outlet.
+ * Authgaurd applied to the secured routes, which can only be accessed by loged in User or Admin.
+ */
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},

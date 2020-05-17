@@ -25,6 +25,12 @@ export class UserAccountComponent implements OnInit {
     this.userDetails = new Users();
   }
 
+  /**
+   * Method to delete the user from database.
+   * also finds the booking made by the current user and deletes them as user is sub entity of booking in database.
+   * warning prone to transactional error -  update required.
+   * [ example updating scheduledflight.available seats at time of booking]
+   */
   deleteAccount(): void {
     this.bookings = new Array();
     this.bookingsService.getBookingsByUserId(this.userDetails.userId)
@@ -47,10 +53,16 @@ export class UserAccountComponent implements OnInit {
       });
   }
 
+  /**
+   * Method to update DOM with form to get details to update account from user.
+   */
   updateAccount(): void {
     this.showUpdate = true;
   }
 
+  /**
+   * Method to call service to update account in database
+   */
   confirmUpdateAccount(): void {
     this.userService.updateUser(this.userDetails).subscribe(user => {
       this.globalService.setCurrentUser(user);

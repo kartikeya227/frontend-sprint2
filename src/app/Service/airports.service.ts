@@ -35,8 +35,6 @@ export class AirportsService {
     );
   }
 
-  //////// Save methods //////////
-
   /** POST: add a new Airport to the server */
   addAirport(airport: Airport): Observable<Airport> {
     return this.http.post<Airport>(this.airportsUrl, airport, this.httpOptions).pipe(
@@ -84,6 +82,6 @@ export class AirportsService {
   }
 
   private log(message: string) {
-    alert('Server message:' + message);
+    console.log('Server message:' + message);
   }
 }

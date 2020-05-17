@@ -22,10 +22,16 @@ export class AdminBookingsComponent implements OnInit {
     this.displayDetails = false;
   }
 
+  /**
+   * Method to call service fetch all the booking from Database.
+   */
   getBookings(): void {
     this.bookingsService.getBookings().subscribe(bookings => this.bookings = bookings);
   }
 
+  /**
+   * Method to Update DOM to show details of currently clicked booking by user.
+   */
   getDetails(i: number): void {
     this.displayDetails = true;
     this.currentBooking = this.bookings[i];

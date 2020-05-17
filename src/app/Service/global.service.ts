@@ -1,3 +1,8 @@
+/** *
+ * Service to provide Global variable for inter component message passing and resource sharing.
+ * Current user
+ * Booking selected [user || while making booking]
+ */
 import {Injectable} from '@angular/core';
 import {Users} from '../Model/users';
 import {ScheduledFlight} from '../Model/scheduled-flight';

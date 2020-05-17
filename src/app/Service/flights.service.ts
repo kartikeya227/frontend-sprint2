@@ -1,5 +1,7 @@
-// flightsUrl = 'http://localhost:9090/admin/flights';
-
+/** *
+ * Service for Flight Http requests
+ * flightsUrl = 'http://localhost:9090/admin/flights';
+ */
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
@@ -86,6 +88,6 @@ export class FlightsService {
   }
 
   private log(message: string) {
-    alert('Server message:' + message);
+    console.log('Server message:' + message);
   }
 }

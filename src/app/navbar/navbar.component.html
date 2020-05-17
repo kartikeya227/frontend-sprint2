@@ -1,20 +1,35 @@
-<nav class="navbar navbar-light bg-light justify-content-between">
+<nav class="navbar nav navbar-light bg-light justify-content-between">
   <a class="navbar-brand" href="#">
-    <img alt="" class="d-inline-block align-top" height="30" src="../../assets/images/icon.png" width="30">
-    {{title}}
+    <img alt="" class="d-inline-block align-top" height="25" src="../../assets/images/icon.png" width="25">
+    &nbsp;&nbsp;{{title}}
   </a>
 
   <form class="form-inline">
-    <button class="btn btn-outline-success my-2 my-sm-0 mr-1" routerLink="/signupsuccess" type="submit">All Users
-    </button>
-    <button (click)="changeLoginState(false)" [hidden]="!loginStatus" class="btn btn-outline-success my-2 my-sm-0" routerLink="/"
-            type="submit">Logout
-    </button>
-    <button (click)="loginStatus = true" [hidden]="loginStatus" class="btn btn-outline-success my-2 my-sm-0 mr-1" routerLink="/login"
-            type="submit">Login
-    </button>
-    <button [hidden]="loginStatus" class="btn btn-outline-success my-2 my-sm-0" routerLink="/signup" type="submit">Sign
-      Up
-    </button>
+    <div class="dropleft">
+      <button aria-expanded="false" aria-haspopup="true"
+              class="navbar-toggler" data-toggle="dropdown" id="dropdownMenuButton" type="button">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
+
+        <button class="dropdown-item btn btn-outline-success my-2 my-sm-0 mr-1" routerLink="/signupsuccess"
+                type="submit">All Users
+        </button>
+        <button (click)="changeLoginState(false)" [hidden]="!loginStatus"
+                class="dropdown-item btn btn-outline-success my-2 my-sm-0" routerLink="/"
+                type="submit">Logout
+        </button>
+        <button (click)="loginStatus = true" [hidden]="loginStatus"
+                class="dropdown-item btn btn-outline-success my-2 my-sm-0 mr-1" routerLink="/login"
+                type="submit">Login
+        </button>
+        <button [hidden]="loginStatus" class="dropdown-item btn btn-outline-success my-2 my-sm-0" routerLink="/signup"
+                type="submit">Sign
+          Up
+        </button>
+      </div>
+    </div>
   </form>
 </nav>
+
+

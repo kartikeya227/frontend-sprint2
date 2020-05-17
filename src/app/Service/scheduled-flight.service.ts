@@ -1,4 +1,7 @@
-// scheduledFlightUrl = 'http://localhost:9090/scheduled/flight';
+/** *
+ * Service for Scheduled Flight Http requests
+ * scheduledFlightUrl = 'http://localhost:9090/scheduled/flight';
+ */
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
@@ -101,6 +104,6 @@ export class ScheduledFlightService {
   }
 
   private log(message: string) {
-    alert('Server message:' + message);
+    console.log('Server message:' + message);
   }
 }

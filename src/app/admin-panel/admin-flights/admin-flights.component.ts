@@ -25,6 +25,9 @@ export class AdminFlightsComponent implements OnInit {
     this.flights = new Array();
   }
 
+  /**
+   * Method to fetch all the flights from Database.
+   */
   getFlights(): void {
     this.flightsService.getFlights()
       .subscribe(flights => {
@@ -38,6 +41,9 @@ export class AdminFlightsComponent implements OnInit {
       });
   }
 
+  /**
+   * Method to Update DOM with the details of currently clicked flight.
+   */
   showFlightDetails(i: number) {
     this.currentFlight = this.flights[i];
     this.showDetails = true;
@@ -45,6 +51,9 @@ export class AdminFlightsComponent implements OnInit {
     this.showAdd = false;
   }
 
+  /**
+   * Method to call service for deleting the current selected flight from the database.
+   */
   deleteFlight(): void {
     this.flightsService.deleteFlight(this.currentFlight.flightNumber)
       .subscribe(value => {
@@ -52,6 +61,9 @@ export class AdminFlightsComponent implements OnInit {
       });
   }
 
+  /**
+   * Method to update DOM with the form to take input for adding new flight.
+   */
   showAddFlight(): void {
     this.showAdd = true;
     this.showDetails = false;
@@ -59,17 +71,29 @@ export class AdminFlightsComponent implements OnInit {
     this.currentFlight = new Flights();
   }
 
+  /**
+   * Method to call service for adding new flight to database
+   */
   addFlight(): void {
+    this.showDetails = false;
+    this.showUpdate = false;
     this.flightsService.addFlight(this.currentFlight)
       .subscribe(value => {
         this.getFlights();
       });
   }
 
+  /**
+   * Method to update DOM with the form to take input for updating flight.
+   */
   showUpdateFlight() {
     this.showUpdate = true;
+    this.showDetails = false;
   }
 
+  /**
+   * Method to call service for updating flight in  database
+   */
   updateFlight(): void {
     this.flightsService.updateFlight(this.currentFlight)
       .subscribe(value => {

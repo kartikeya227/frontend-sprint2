@@ -1,42 +1,221 @@
 <app-admin-panel></app-admin-panel>
+<section class="min-vh-100" id="cover">
+  <div id="cover-caption">
+    <div class="container">
+      <h1 class="display-4 py-2 text-truncate text-center text-white"><b>SCHEDULE</b></h1>
+      <div class="row">
 
-<div class="container-fluid">
-  <div class="row">
 
-    <div class="card my-5 col-sm-3 col-md-6 col-lg-4">
+        <div class=" my-5 col">
+          <div class="card my-5">
+            <div class="card-header text-center text-dark"><b>Scheduled Flights</b></div>
+            <table class="table table-bordered table-striped">
+              <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Id</th>
+                <th scope="col">Carrier Name</th>
+                <th scope="col">From</th>
+                <th scope="col">To</th>
+                <th scope="col">Date</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr (click)="getCurrentScheduledFlight(i)"
+                  *ngFor="let scheduledFlight of scheduledFlights; let i = index">
+                <td>{{i + 1}}</td>
+                <td>{{ scheduledFlight.scheduleFlightId }}</td>
+                <td>{{ scheduledFlight.flight.carrierName }}</td>
+                <td>{{ scheduledFlight.schedule.sourceAirport.airportLocation }}</td>
+                <td>{{ scheduledFlight.schedule.destinationAirport.airportLocation }}</td>
+                <td>{{ scheduledFlight.schedule.arrivalDate }}</td>
+              </tr>
+              </tbody>
+            </table>
+            <div>
+              <button (click)="showAddScheduledFlight()" class="btn btn-primary mr-1" type="submit">Add Flight</button>
+            </div>
 
-      <div *ngIf="!showScheduledFlights">
-        <div class="card-header alert-danger font-weight-bolder text-center">No Scheduled Flight available.</div>
-      </div>
+          </div>
+        </div>
 
-      <div *ngIf="showScheduledFlights" class="card-body">
-        <div class="card-header alert-success font-weight-bolder text-center">List of Available Scheduled Flights.</div>
-        <table class="table table-bordered table-striped">
-          <thead class="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Id</th>
-            <th scope="col">Carrier Name</th>
-            <th scope="col">From</th>
-            <th scope="col">To</th>
-            <th scope="col">Date</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr (click)="getCurrentScheduledFlight(i)" *ngFor="let scheduledFlight of scheduledFlights; let i = index">
-            <td>{{i + 1}}</td>
-            <td>{{ scheduledFlight.scheduleFlightId }}</td>
-            <td>{{ scheduledFlight.flight.carrierName }}</td>
-            <td>{{ scheduledFlight.schedule.sourceAirport.airportLocation }}</td>
-            <td>{{ scheduledFlight.schedule.destinationAirport.airportLocation }}</td>
-            <td>{{ scheduledFlight.schedule.arrivalDate }}</td>
-          </tr>
-          </tbody>
-        </table>
-        <div>
-          <button (click)="showAddScheduledFlight()" class="btn btn-info mr-1" type="submit">Add Flight</button>
-          <div *ngIf="showAdd">
+        <div *ngIf="showDetails" class="my-5 col">
+          <div class="card my-5">
+            <div class="card-header text-center text-dark"><b>Scheduled Flight Details</b></div>
+            <table class="table table-bordered table-striped">
+              <tbody>
+              <tr>
+                <td>Scheduled Flight Id</td>
+                <td>{{currentScheduledFlight.scheduleFlightId}}</td>
+              </tr>
+              <tr>
+                <td>Available Seats</td>
+                <td>{{currentScheduledFlight.availableSeats}}</td>
+              </tr>
+              <tr>
+                <td>Cost Per Ticket</td>
+                <td>{{currentScheduledFlight.costPerTicket}}</td>
+              </tr>
+              <tr>
+                <td>Boarding Airport Code</td>
+                <td>{{currentScheduledFlight.schedule.sourceAirport.airportCode}}</td>
+              </tr>
+              <tr>
+                <td>Boarding Airport Name</td>
+                <td>{{currentScheduledFlight.schedule.sourceAirport.airportName}}</td>
+              </tr>
+              <tr>
+                <td>Boarding Airport Location</td>
+                <td>{{currentScheduledFlight.schedule.sourceAirport.airportLocation}}</td>
+              </tr>
+              <tr>
+                <td>Landing Airport Code</td>
+                <td>{{currentScheduledFlight.schedule.destinationAirport.airportCode}}</td>
+              </tr>
+              <tr>
+                <td>Landing Airport Name</td>
+                <td>{{currentScheduledFlight.schedule.destinationAirport.airportName}}</td>
+              </tr>
+              <tr>
+                <td>Landing Airport Location</td>
+                <td>{{currentScheduledFlight.schedule.destinationAirport.airportLocation}}</td>
+              </tr>
+              <tr>
+                <td>Boarding Date</td>
+                <td>{{currentScheduledFlight.schedule.arrivalDate}}</td>
+              </tr>
+              <tr>
+                <td>Boarding Time</td>
+                <td>{{currentScheduledFlight.schedule.arrivalTime}}</td>
+              </tr>
+              <tr>
+                <td>Landing Date</td>
+                <td>{{currentScheduledFlight.schedule.departureDate}}</td>
+              </tr>
+              <tr>
+                <td>Landing Time</td>
+                <td>{{currentScheduledFlight.schedule.departureTime}}</td>
+              </tr>
+              <tr>
+                <td>Flight Id</td>
+                <td>{{currentScheduledFlight.flight.flightNumber}}</td>
+              </tr>
+              <tr>
+                <td>Carrier Name</td>
+                <td>{{currentScheduledFlight.flight.carrierName}}</td>
+              </tr>
+              <tr>
+                <td>Seat Capacity of Aircraft</td>
+                <td>{{currentScheduledFlight.flight.seatCapacity}}</td>
+              </tr>
+              <tr>
+                <td>Aircraft Model</td>
+                <td>{{currentScheduledFlight.flight.flightModel}}</td>
+              </tr>
+              </tbody>
+            </table>
+            <div>
+              <button
+                (click)="deleteScheduledFlight()" class="btn btn-danger mt-2 mb-2 mr-2" type="submit">Delete Scheduled
+                Flight
+              </button>
+              <button
+                (click)="showUpdateScheduledFlight()" class="btn btn-info mt-2 mb-2" type="submit">Update Scheduled
+                Flight
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="showUpdate" class="my-5 col">
+          <div class="card my-5">
+            <div class="card-header text-center text-dark"><b> Update Scheduled Flight Details</b></div>
+            <div>
+              <div class="card-header text-center font-weight-bolder">Select Updated Airports</div>
+              <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Boarding</th>
+                  <th scope="col">Landing</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let airport of airports; let i = index">
+                  <td (click)="getArrivalAirport(i)" class="btn-outline-secondary">{{ airport.airportLocation }}</td>
+                  <td (click)="getDepartureAirport(i)" class="btn-outline-secondary">{{ airport.airportLocation}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div>
+              <div class="card-header text-center font-weight-bolder">Select Updated Flight</div>
+              <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Carrier Name</th>
+                  <th scope="col">Aircraft Model</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr (click)="getFlight(i)" *ngFor="let flight of flights; let i = index" class="btn-outline-secondary">
+                  <td>{{ flight.carrierName }}</td>
+                  <td>{{ flight.flightModel }}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
             <hr>
+            <table class="table table-bordered table-striped">
+              <tbody>
+              <tr>
+                <td>Boarding Airport</td>
+                <td>{{ arrivalAirportDisplay }}</td>
+              </tr>
+              <tr>
+                <td>Landing Airport</td>
+                <td>{{ destinationAirportDisplay }}</td>
+              </tr>
+              <tr>
+                <td>Flight</td>
+                <td>{{ flightDisplay }}</td>
+              </tr>
+              </tbody>
+            </table>
+            <hr>
+            <table class="table table-bordered table-striped">
+              <tbody>
+              <tr>
+                <td><b>Cost Per Ticket</b></td>
+                <td><b>Available Seats</b></td>
+                <td><b>Boarding Date</b></td>
+              </tr>
+              <tr>
+                <td><input [(ngModel)]="currentScheduledFlight.costPerTicket"></td>
+                <td><input [(ngModel)]="currentScheduledFlight.availableSeats"></td>
+                <td><input [(ngModel)]="currentScheduledFlight.schedule.arrivalDate"></td>
+              </tr>
+              <tr>
+                <td><b>Boarding Time</b></td>
+                <td><b>Landing Date</b></td>
+                <td><b>Landing Time</b></td>
+              </tr>
+              <tr>
+                <td><input [(ngModel)]="currentScheduledFlight.schedule.arrivalTime"></td>
+                <td><input [(ngModel)]="currentScheduledFlight.schedule.departureDate"></td>
+                <td><input [(ngModel)]="currentScheduledFlight.schedule.departureTime"></td>
+              </tr>
+              </tbody>
+            </table>
+
+            <div>
+              <button (click)="updateScheduledFlight()" class="btn btn-primary mt-2 mb-2" type="submit">Confirm</button>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="showAdd" class="my-5 col">
+          <div class="card my-5">
             <div>
               <div class="card-header text-center font-weight-bolder">Enter Flight Details</div>
               <hr>
@@ -77,7 +256,6 @@
               </table>
             </div>
 
-            <hr>
             <table class="table table-bordered table-striped">
               <tbody>
               <tr>
@@ -94,7 +272,6 @@
               </tr>
               </tbody>
             </table>
-            <hr>
 
             <form #addScheduledFlightForm="ngForm" (ngSubmit)="addScheduledFlight()">
 
@@ -164,210 +341,14 @@
               <button [disabled]="!(addScheduledFlightForm.form.valid
                                               && !(arrivalAirportDisplay == 'Select Boarding Airport')
                                               && !(destinationAirportDisplay == 'Select Landing Airport')
-                                              && !(arrivalAirportDisplay == 'Select Flight'))" class="btn btn-info"
-                      type="submit">Submit & Schedule Flight
+                                              && !(flightDisplay == 'Select Flight'))" class="btn btn-primary mt-2 mb-2"
+                      type="submit">Submit
               </button>
             </form>
           </div>
         </div>
-      </div>
-
-
-    </div>
-
-    <div class="card my-5 col-sm-9 col-md-6 col-lg-8">
-      <div *ngIf="showDetails" class="card-body">
-        <div class="card-header alert-success font-weight-bolder text-center">Scheduled Flight Details</div>
-        <table class="table table-bordered table-striped">
-          <thead class="thead-dark">
-
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Field</th>
-            <th scope="col">Value</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>1</td>
-            <td>Scheduled Flight Id</td>
-            <td>{{currentScheduledFlight.scheduleFlightId}}</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Available Seats</td>
-            <td>{{currentScheduledFlight.availableSeats}}</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Cost Per Ticket</td>
-            <td>{{currentScheduledFlight.costPerTicket}}</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Boarding Airport Code</td>
-            <td>{{currentScheduledFlight.schedule.sourceAirport.airportCode}}</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Boarding Airport Name</td>
-            <td>{{currentScheduledFlight.schedule.sourceAirport.airportName}}</td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>Boarding Airport Location</td>
-            <td>{{currentScheduledFlight.schedule.sourceAirport.airportLocation}}</td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>Landing Airport Code</td>
-            <td>{{currentScheduledFlight.schedule.destinationAirport.airportCode}}</td>
-          </tr>
-          <tr>
-            <td>8</td>
-            <td>Landing Airport Name</td>
-            <td>{{currentScheduledFlight.schedule.destinationAirport.airportName}}</td>
-          </tr>
-          <tr>
-            <td>9</td>
-            <td>Landing Airport Location</td>
-            <td>{{currentScheduledFlight.schedule.destinationAirport.airportLocation}}</td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td>Boarding Date</td>
-            <td>{{currentScheduledFlight.schedule.arrivalDate}}</td>
-          </tr>
-          <tr>
-            <td>11</td>
-            <td>Boarding Time</td>
-            <td>{{currentScheduledFlight.schedule.arrivalTime}}</td>
-          </tr>
-          <tr>
-            <td>12</td>
-            <td>Landing Date</td>
-            <td>{{currentScheduledFlight.schedule.departureDate}}</td>
-          </tr>
-          <tr>
-            <td>13</td>
-            <td>Landing Time</td>
-            <td>{{currentScheduledFlight.schedule.departureTime}}</td>
-          </tr>
-          <tr>
-            <td>14</td>
-            <td>Flight Id</td>
-            <td>{{currentScheduledFlight.flight.flightNumber}}</td>
-          </tr>
-          <tr>
-            <td>15</td>
-            <td>Carrier Name</td>
-            <td>{{currentScheduledFlight.flight.carrierName}}</td>
-          </tr>
-          <tr>
-            <td>16</td>
-            <td>Seat Capacity of Aircraft</td>
-            <td>{{currentScheduledFlight.flight.seatCapacity}}</td>
-          </tr>
-          <tr>
-            <td>17</td>
-            <td>Aircraft Model</td>
-            <td>{{currentScheduledFlight.flight.flightModel}}</td>
-          </tr>
-          </tbody>
-        </table>
-        <button (click)="deleteScheduledFlight()" class="btn btn-danger mr-1" type="submit">Delete Scheduled Flight
-        </button>
-        <button (click)="showUpdateScheduledFlight()" class="btn btn-info" type="submit">Update Scheduled Flight
-        </button>
-
 
       </div>
     </div>
-
   </div>
-  <div *ngIf="showUpdate">
-
-    <div class="card-header alert-success font-weight-bolder text-center">Update Scheduled Flight Details</div>
-
-    <div>
-      <div class="card-header text-center font-weight-bolder">Select Updated Airports</div>
-      <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-        <tr>
-          <th scope="col">Boarding</th>
-          <th scope="col">Landing</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let airport of airports; let i = index">
-          <td (click)="getArrivalAirport(i)" class="btn-outline-secondary">{{ airport.airportLocation }}</td>
-          <td (click)="getDepartureAirport(i)" class="btn-outline-secondary">{{ airport.airportLocation}}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div>
-      <div class="card-header text-center font-weight-bolder">Select Updated Flight</div>
-      <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-        <tr>
-          <th scope="col">Carrier Name</th>
-          <th scope="col">Aircraft Model</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr (click)="getFlight(i)" *ngFor="let flight of flights; let i = index" class="btn-outline-secondary">
-          <td>{{ flight.carrierName }}</td>
-          <td>{{ flight.flightModel }}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-    <hr>
-    <table class="table table-bordered table-striped">
-      <tbody>
-      <tr>
-        <td>Boarding Airport</td>
-        <td>{{ arrivalAirportDisplay }}</td>
-      </tr>
-      <tr>
-        <td>Landing Airport</td>
-        <td>{{ destinationAirportDisplay }}</td>
-      </tr>
-      <tr>
-        <td>Flight</td>
-        <td>{{ flightDisplay }}</td>
-      </tr>
-      </tbody>
-    </table>
-    <hr>
-    <table class="table table-bordered table-striped">
-      <thead class="thead-dark">
-      <tr>
-        <th scope="col">Cost Per Ticket</th>
-        <th scope="col">Available Seats</th>
-        <th scope="col">Boarding Date</th>
-        <th scope="col">Boarding Time</th>
-        <th scope="col">Landing Date</th>
-        <th scope="col">Landing Time</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td><input [(ngModel)]="currentScheduledFlight.costPerTicket"></td>
-        <td><input [(ngModel)]="currentScheduledFlight.availableSeats"></td>
-        <td><input [(ngModel)]="currentScheduledFlight.schedule.arrivalDate"></td>
-        <td><input [(ngModel)]="currentScheduledFlight.schedule.arrivalTime"></td>
-        <td><input [(ngModel)]="currentScheduledFlight.schedule.departureDate"></td>
-        <td><input [(ngModel)]="currentScheduledFlight.schedule.departureTime"></td>
-      </tr>
-      </tbody>
-    </table>
-    <button (click)="updateScheduledFlight()" class="btn btn-info mr-1" type="submit">Confirm & Update Scheduled
-      Flight
-    </button>
-
-  </div>
-</div>
-
+</section>

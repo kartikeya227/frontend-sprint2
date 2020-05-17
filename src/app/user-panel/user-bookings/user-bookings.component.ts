@@ -29,6 +29,9 @@ export class UserBookingsComponent implements OnInit {
     this.displayList = true;
   }
 
+  /**
+   * Method to call service to fetch all booking made by the current loged in user from database.
+   */
   getBookings(): void {
     this.bookingsService.getBookingsByUserId(this.globalService.getCurrentUser().userId).subscribe(bookings => {
       this.bookings = bookings;
@@ -40,21 +43,34 @@ export class UserBookingsComponent implements OnInit {
 
   }
 
+  /**
+   * Method to Update DOM with details of currently clicked booking.
+   */
   getDetails(i: number): void {
     this.displayDetails = true;
     this.currentBooking = this.bookings[i];
   }
 
+  /**
+   * Method to Update DOM with form to get details of updated clicked booking.
+   */
   updateDetails(): void {
     this.showUpdate = true;
+    this.displayDetails = false;
   }
 
+  /**
+   * Method to call service to update the booking in database
+   */
   ConfirmUpdateDetails(): void {
     this.bookingsService.updateBookings(this.currentBooking).subscribe();
     this.showUpdate = false;
     this.getBookings();
   }
 
+  /**
+   * Method to call service to delete the selected booking from database.
+   */
   deleteBooking(): void {
     this.bookingsService.deleteBookings(this.currentBooking.bookingId).subscribe(value => {
       this.displayList = false;

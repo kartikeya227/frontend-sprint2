@@ -1,4 +1,7 @@
-// userUrl = 'http://localhost:9090/user';
+/** *
+ * Service for User Http requests
+ * userUrl = 'http://localhost:9090/user';
+ */
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
@@ -85,6 +88,6 @@ export class UserService {
   }
 
   private log(message: string) {
-    alert('Server message:' + message);
+    console.log('Server message:' + message);
   }
 }
