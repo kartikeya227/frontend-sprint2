@@ -73,11 +73,11 @@
       </div>
 
 
-      <div *ngIf="scheduledFlightsReady" class="row text-left align-content-center mt-3 ml-4">
+      <div *ngIf="scheduledFlightsReady" class="row text-left align-content-center mt-3 ml-3">
 
         <div *ngFor="let scheduledFlight of scheduledFlights" class="card-deck col ">
-          <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
-            <div class="card-header">Fly with&nbsp;{{scheduledFlight.flight.carrierName}}</div>
+          <div class="card text-white bg-success mb-3" style="min-width: 18rem;">
+            <div class="card-header">Fly with&nbsp;<b>{{scheduledFlight.flight.carrierName}}</b></div>
             <div class="card-body">
               <h5 class="card-title">From: &nbsp;
                 {{scheduledFlight.schedule.sourceAirport.airportLocation}}&nbsp;
