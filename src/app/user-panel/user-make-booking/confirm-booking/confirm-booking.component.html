@@ -1,109 +1,3 @@
-<!--<app-user-panel></app-user-panel>-->
-<!--<hr>-->
-<!--&lt;!&ndash;Input for passenger details&ndash;&gt;-->
-<!--<div>-->
-
-<!--  <div class="card mr-5 ml-5">-->
-<!--    <div class="card-header">Enter Passneger details here</div>-->
-<!--    <div class="card-body">-->
-<!--      <form #addPassengersForm="ngForm" (ngSubmit)="addPassengers()">-->
-<!--        <div class="form-group">-->
-<!--          <label for="passengerName">Name</label>-->
-<!--          <input #passengerName="ngModel" [(ngModel)]="passenger.passengerName"-->
-<!--                 class="form-control"-->
-<!--                 id="passengerName"-->
-<!--                 name="passengerName"-->
-<!--                 pattern="[A-Z][a-z]{2,14}[[\s][A-Z][a-z]{0,14}]{0,1}"-->
-<!--                 placeholder="Enter Passenger Name"-->
-<!--                 required type="text">-->
-<!--        </div>-->
-<!--        <div [hidden]="passengerName.valid || passengerName.pristine" class="alert alert-danger">Passenger Name is-->
-<!--          required, First letter of first name and last name should be capital, last name is optional.-->
-<!--        </div>-->
-
-<!--        <div class="form-group">-->
-<!--          <label for="passengerAge">Age</label>-->
-<!--          <input #passengerAge="ngModel" [(ngModel)]="passenger.passengerAge"-->
-<!--                 class="form-control"-->
-<!--                 id="passengerAge"-->
-<!--                 name="passengerAge"-->
-<!--                 pattern="[1-9][0-9]{0,2}"-->
-<!--                 placeholder="Enter Age"-->
-<!--                 required type="number">-->
-<!--        </div>-->
-<!--        <div [hidden]="passengerAge.valid || passengerAge.pristine" class="alert alert-danger">Passenger's age is-->
-<!--          required-->
-<!--        </div>-->
-
-<!--        <div class="form-group">-->
-<!--          <label for="passengerUin">Unique Id Number</label>-->
-<!--          <input #passengerUin="ngModel" [(ngModel)]="passenger.passengerUin"-->
-<!--                 class="form-control"-->
-<!--                 id="passengerUin"-->
-<!--                 name="passengerUin"-->
-<!--                 pattern="[1-9][0-9]{11}"-->
-<!--                 placeholder="Enter Unique Id Number"-->
-<!--                 required type="number">-->
-<!--        </div>-->
-<!--        <div [hidden]="passengerUin.valid || passengerUin.pristine" class="alert alert-danger">Aadhaar number is-->
-<!--          required, 12 digits-->
-<!--        </div>-->
-
-<!--        <div class="form-group">-->
-<!--          <label for="luggage">Weight of Luggage</label>-->
-<!--          <input #luggage="ngModel" [(ngModel)]="passenger.luggage"-->
-<!--                 class="form-control"-->
-<!--                 id="luggage"-->
-<!--                 name="luggage"-->
-<!--                 pattern="[0-9][0-9]{0,1}[.][0-9][0-9]"-->
-<!--                 placeholder="Enter Weight of Luggage"-->
-<!--                 required type="number">-->
-<!--        </div>-->
-<!--        <div [hidden]="luggage.valid || luggage.pristine" class="alert alert-danger">Weight of Luggage is required, not-->
-<!--          greater than 100KG. accuracy upto two decimal places.-->
-<!--        </div>-->
-
-<!--        <button [disabled]="!addPassengersForm.form.valid" class="btn btn-info"-->
-<!--                type="submit">Add Passenger-->
-<!--        </button>-->
-<!--      </form>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--</div>-->
-<!--&lt;!&ndash;Already entered passengers&ndash;&gt;-->
-<!--<div class="mr-5 ml-5">-->
-
-<!--  <div class="card mr-5 ml-5>">-->
-<!--    <div class="card-header">List of Passengers entered till now.</div>-->
-<!--    <div class="card-body">-->
-<!--      <table class="table table-bordered table-striped">-->
-<!--        <thead class="thead-dark">-->
-<!--        <tr>-->
-<!--          <th scope="col">#</th>-->
-<!--          <th scope="col">Name</th>-->
-<!--          <th scope="col">Age</th>-->
-<!--          <th scope="col">Uin</th>-->
-<!--          <th scope="col">Luggage</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr *ngFor="let passenger of passengers; let i = index">-->
-<!--          <td>{{i + 1}}</td>-->
-<!--          <td>{{ passenger.passengerName }}</td>-->
-<!--          <td>{{ passenger.passengerAge }}</td>-->
-<!--          <td>{{ passenger.passengerUin}}</td>-->
-<!--          <td>{{ passenger.luggage}}</td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--      </table>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <button (click)="makeBooking()" [disabled]="passengers.length <= 0 || passengers.length > 10"-->
-<!--          class="btn btn-info ml-5" type="submit">Confirm & Book-->
-<!--  </button>-->
-<!--</div>-->
-
 <app-user-panel></app-user-panel>
 <section class="min-vh-100" id="cover">
   <div id="cover-caption">
@@ -173,7 +67,7 @@
                 greater than 100KG. accuracy upto two decimal places.
               </div>
 
-              <button [disabled]="!addPassengersForm.form.valid" class="btn btn-info mb-2 mt-2"
+              <button [disabled]="!addPassengersForm.form.valid" class="btn btn-primary mb-2 mt-2"
                       type="submit">Add Passenger
               </button>
             </form>
@@ -200,7 +94,7 @@
             </table>
             <div>
               <button (click)="makeBooking()" [disabled]="passengers.length <= 0 || passengers.length > 10"
-                      class="btn btn-info ml-5 mb-2" type="submit"> Book Tickets
+                      class="btn btn-primary ml-5 mb-2" type="submit"> Book Tickets
               </button>
             </div>
           </div>

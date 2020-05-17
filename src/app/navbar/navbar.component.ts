@@ -19,7 +19,6 @@ export class NavbarComponent implements OnInit {
   changeLoginState(ls: boolean) {
     this.globalService.setLoginStatus(ls);
     this.loginStatus = this.globalService.getLoginStatus();
-    alert('logout' + this.globalService.getLoginStatus());
   }
 
   ngOnInit(): void {
